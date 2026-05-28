@@ -10,8 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/styles.css" />
 </head>
-<body data-bg="kpi">
-  <!-- background variants (only the one matching [data-bg] on body is shown) -->
+<body data-bg="particles">
   <canvas id="bg-canvas" class="bg-layer bg-particles" aria-hidden="true"></canvas>
   <div class="grid-overlay bg-layer bg-particles" aria-hidden="true"></div>
 
@@ -130,14 +129,13 @@
     </svg>
   </div>
 
-  <!-- background switcher (temporary, for A/B testing) -->
-  <div class="bg-switcher" role="group" aria-label="background style">
-    <span class="bg-switcher-label mono">// bg</span>
-    <button type="button" data-bg-pick="particles" title="particles + grid (baseline)">particles</button>
-    <button type="button" data-bg-pick="kpi" title="live KPI ticker">kpi</button>
-    <button type="button" data-bg-pick="dag2" title="labeled DAG pipeline">dag v2</button>
-    <button type="button" data-bg-pick="prompt" title="typing psql prompt">prompt</button>
-    <button type="button" data-bg-pick="erd" title="ER diagram ghost">erd</button>
+  <!-- preview pages (temporary, while choosing a new theme) -->
+  <div class="preview-nav" role="group" aria-label="theme previews">
+    <span class="preview-nav-label mono">// preview themes:</span>
+    <a href="preview/operator.html">operator</a>
+    <a href="preview/notebook.html" class="is-pending">notebook</a>
+    <a href="preview/console.html" class="is-pending">console</a>
+    <a href="preview/pipeline.html" class="is-pending">pipeline</a>
   </div>
 
   <div class="cursor-glow" aria-hidden="true"></div>

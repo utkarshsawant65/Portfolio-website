@@ -1,0 +1,466 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>utkarsh@portfolio:~$</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* =========================================================
+       THE OPERATOR — terminal-native portfolio theme
+       single mono font, single accent, no cards, no buttons
+       ========================================================= */
+
+    :root {
+      --bg:        #0b0e0c;       /* near-black, slight green tint */
+      --bg-2:     #11141; /* unused but keep palette */
+      --fg:        #d4e6d4;       /* warm phosphor white */
+      --fg-dim:    #6b7d6b;
+      --fg-mute:   #3d4a3d;
+      --green:     #6bcf7f;       /* primary accent — old-school terminal green */
+      --amber:     #ffb86b;       /* warning / paths */
+      --red:       #ff6b6b;       /* errors */
+      --cyan:      #6bd3ff;       /* values / links */
+      --magenta:   #d36bff;       /* keywords */
+      --selection: rgba(107, 207, 127, 0.25);
+    }
+
+    * { box-sizing: border-box; }
+    *::selection { background: var(--selection); color: var(--fg); }
+
+    html, body {
+      margin: 0; padding: 0;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+      font-size: 15px;
+      line-height: 1.65;
+      font-weight: 400;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* CRT scanline + vignette overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 100;
+      background:
+        repeating-linear-gradient(
+          to bottom,
+          transparent 0,
+          transparent 2px,
+          rgba(0, 0, 0, 0.15) 2px,
+          rgba(0, 0, 0, 0.15) 3px
+        );
+      mix-blend-mode: multiply;
+      opacity: 0.6;
+    }
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 99;
+      background: radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.5) 100%);
+    }
+
+    /* fake terminal window chrome */
+    .term {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 24px 80px;
+    }
+
+    .term-chrome {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      margin: 0 -24px 24px;
+      background: rgba(11, 14, 12, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--fg-mute);
+    }
+    .term-dot {
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      background: var(--fg-mute);
+    }
+    .term-dot--r { background: var(--red); }
+    .term-dot--y { background: var(--amber); }
+    .term-dot--g { background: var(--green); }
+    .term-title {
+      margin-left: 12px;
+      color: var(--fg-dim);
+      font-size: 12px;
+    }
+
+    /* shared prompt + command formatting */
+    .prompt { color: var(--green); }
+    .prompt::before { content: '$ '; color: var(--green); }
+    .cmd { color: var(--fg); font-weight: 500; }
+    .flag { color: var(--amber); }
+    .path { color: var(--cyan); }
+    .str  { color: var(--amber); }
+    .kw   { color: var(--magenta); }
+    .num  { color: var(--cyan); }
+    .comment { color: var(--fg-mute); font-style: italic; }
+    .ok   { color: var(--green); }
+    .err  { color: var(--red); }
+
+    h1, h2, h3 { font-weight: 600; margin: 0; color: var(--fg); }
+    h1 { font-size: 15px; }
+    h2 { font-size: 15px; }
+    h3 { font-size: 15px; }
+
+    p, ul { margin: 0; padding: 0; }
+    ul { list-style: none; }
+
+    /* one "block" = one command + its output */
+    .block { margin-bottom: 32px; }
+    .block .cmdline { margin-bottom: 4px; }
+    .block .output {
+      padding-left: 16px;
+      border-left: 1px solid var(--fg-mute);
+      margin-top: 6px;
+    }
+    .block .output p + p { margin-top: 4px; }
+    .block .output .row {
+      display: grid;
+      grid-template-columns: 130px 1fr;
+      gap: 12px;
+    }
+    .block .output .row .k { color: var(--fg-dim); }
+
+    /* link style — keep it minimal, no underline-on-hover gimmicks */
+    a {
+      color: var(--cyan);
+      text-decoration: none;
+      border-bottom: 1px dashed var(--cyan);
+    }
+    a:hover { color: var(--fg); border-bottom-color: var(--fg); }
+
+    /* big ASCII banner */
+    .banner {
+      color: var(--green);
+      font-size: 13px;
+      line-height: 1.2;
+      white-space: pre;
+      margin-bottom: 16px;
+    }
+    @media (max-width: 720px) {
+      .banner { font-size: 9px; }
+    }
+
+    /* blinking cursor */
+    .cursor {
+      display: inline-block;
+      width: 9px;
+      height: 18px;
+      background: var(--green);
+      vertical-align: text-bottom;
+      animation: blink 1s steps(2) infinite;
+      margin-left: 4px;
+    }
+    @keyframes blink {
+      0%, 50%   { opacity: 1; }
+      51%, 100% { opacity: 0; }
+    }
+
+    /* "typed" effect for the very first prompt */
+    .typed { display: inline; }
+    .typed-cursor {
+      display: inline-block;
+      width: 9px;
+      height: 18px;
+      background: var(--green);
+      vertical-align: text-bottom;
+      animation: blink 1s steps(2) infinite;
+    }
+
+    /* project table */
+    .ptable {
+      border-collapse: collapse;
+      width: 100%;
+      font-size: 14px;
+    }
+    .ptable th, .ptable td {
+      text-align: left;
+      padding: 4px 12px 4px 0;
+      vertical-align: top;
+    }
+    .ptable th {
+      color: var(--green);
+      font-weight: 500;
+      border-bottom: 1px solid var(--fg-mute);
+      padding-bottom: 6px;
+    }
+    .ptable td { color: var(--fg); }
+    .ptable td.dim { color: var(--fg-dim); }
+    .ptable tr.divider td { border-bottom: 1px dashed var(--fg-mute); padding: 0; height: 8px; }
+
+    /* "back to main site" pill */
+    .return {
+      position: fixed;
+      top: 20px; right: 20px;
+      z-index: 200;
+      padding: 8px 14px;
+      background: rgba(11, 14, 12, 0.9);
+      border: 1px solid var(--fg-mute);
+      border-radius: 999px;
+      color: var(--fg-dim);
+      font-size: 11px;
+      text-decoration: none;
+      border-bottom-style: solid;
+    }
+    .return:hover { color: var(--green); border-color: var(--green); }
+
+    /* footer note */
+    .footnote {
+      margin-top: 48px;
+      color: var(--fg-mute);
+      font-size: 12px;
+      border-top: 1px dashed var(--fg-mute);
+      padding-top: 12px;
+    }
+
+    /* line wrap for long output on mobile */
+    .wrap { word-break: break-word; }
+
+    @media (max-width: 720px) {
+      body { font-size: 13px; }
+      .term { padding: 0 14px 60px; }
+      .block .output .row { grid-template-columns: 90px 1fr; gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+  <a class="return" href="../index.html" title="back to current portfolio">../index.html</a>
+
+  <div class="term">
+    <div class="term-chrome">
+      <span class="term-dot term-dot--r"></span>
+      <span class="term-dot term-dot--y"></span>
+      <span class="term-dot term-dot--g"></span>
+      <span class="term-title">utkarsh@portfolio: ~/career</span>
+    </div>
+
+    <pre class="banner">
+ _   _ _   _              _      ____                       _
+| | | | |_| | ____ _ _ __| |__  / ___|  __ ___      ____ _ _ __ | |_
+| | | | __| |/ / _` | '__| '_ \ \___ \ / _` \ \ /\ / / _` | '_ \| __|
+| |_| | |_|   < (_| | |  | | | | ___) | (_| |\ V  V / (_| | | | | |_
+ \___/ \__|_|\_\__,_|_|  |_| |_||____/ \__,_| \_/\_/ \__,_|_| |_|\__|
+
+  data engineer · mannheim/berlin · 2026
+    </pre>
+
+    <p class="comment">// last login: <span id="last-login"></span> on tty1</p>
+    <p class="comment">// type 'ls' to begin, or just scroll.</p>
+    <br>
+
+    <!-- whoami -->
+    <div class="block">
+      <p class="cmdline"><span class="prompt"></span><span class="cmd">whoami</span><span class="flag"> --full</span></p>
+      <div class="output">
+        <p><span class="kw">Utkarsh Uday Sawant</span> — data engineer.</p>
+        <div class="row"><span class="k">location</span><span>Mannheim / Berlin, Germany 🇩🇪</span></div>
+        <div class="row"><span class="k">role</span><span>solo DE @ <span class="path">noritual lab</span> (matcha e-commerce, Berlin)</span></div>
+        <div class="row"><span class="k">education</span><span>M.Sc. Applied Data Science · SRH Heidelberg · GPA 1.9</span></div>
+        <div class="row"><span class="k">languages</span><span>English (C1) · Hindi · Marathi · German (B1)</span></div>
+        <div class="row"><span class="k">contact</span><span><a href="mailto:utkarsh.sawant21@gmail.com">utkarsh.sawant21@gmail.com</a></span></div>
+        <div class="row"><span class="k">linkedin</span><span><a href="https://www.linkedin.com/in/utkarsh-sawant/" target="_blank" rel="noopener">/in/utkarsh-sawant</a></span></div>
+        <div class="row"><span class="k">github</span><span><a href="https://github.com/utkarshsawant65" target="_blank" rel="noopener">@utkarshsawant65</a></span></div>
+        <div class="row"><span class="k">status</span><span class="ok">● available_for_hire = true</span></div>
+      </div>
+    </div>
+
+    <!-- cat about.md -->
+    <div class="block">
+      <p class="cmdline"><span class="prompt"></span><span class="cmd">cat</span> <span class="path">about.md</span></p>
+      <div class="output">
+        <p>I'm a data engineer who likes the messy middle — the place where business problems become schemas, schemas become pipelines, and pipelines become decisions.</p>
+        <p>&nbsp;</p>
+        <p>Right now I'm the entire data &amp; automation function at <span class="path">Noritual Lab</span>, a matcha e-commerce startup in Berlin. Solo DE reporting to the founder. I picked the stack, stood up the warehouse, and own everything from <span class="kw">CREATE SCHEMA</span> to the KPI dashboard founders open every Monday.</p>
+        <p>&nbsp;</p>
+        <p>Before that: agentic AI research at <span class="path">BioMed X</span> (Heidelberg) — LangGraph multi-agent system with a Milvus RAG pipeline. Before that: M.Sc. thesis on hybrid TCN-LSTM forecasting where I caught a data-leakage flaw in a published benchmark paper.</p>
+        <p>&nbsp;</p>
+        <p>I care about systems that are <span class="kw">actually used</span>: small, debuggable, documented, cheap to run.</p>
+      </div>
+    </div>
+
+    <!-- ls -lah ~/work -->
+    <div class="block">
+      <p class="cmdline"><span class="prompt"></span><span class="cmd">ls</span> <span class="flag">-lah</span> <span class="path">~/work</span></p>
+      <div class="output">
+        <table class="ptable">
+          <thead>
+            <tr><th>perm</th><th>when</th><th>name</th><th>note</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="dim">drwxr-x</td><td class="dim">2025-05 →</td><td class="path">noritual-lab/</td><td>solo DE · matcha e-comm · Berlin</td></tr>
+            <tr><td class="dim">drwxr-x</td><td class="dim">2024-10 → 2025-03</td><td class="path">biomed-x/</td><td>agentic AI research · LangGraph + Milvus</td></tr>
+            <tr><td class="dim">drwxr-x</td><td class="dim">2024-04 → 2026-03</td><td class="path">srh-heidelberg/</td><td>M.Sc. Applied Data Science · GPA 1.9</td></tr>
+            <tr><td class="dim">drwxr-x</td><td class="dim">2019-07 → 2023-05</td><td class="path">mumbai-uni/</td><td>BE Computer Engineering · GPA 8.39</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- describe noritual -->
+    <div class="block">
+      <p class="cmdline"><span class="prompt"></span><span class="cmd">describe</span> <span class="path">noritual-lab/</span></p>
+      <div class="output">
+        <p><span class="comment">// the entire data &amp; automation function. solo DE. reports to founder.</span></p>
+        <p>&nbsp;</p>
+        <p><span class="green">▸</span> <span class="kw">kpi-dashboard/</span> &nbsp;&nbsp;<span class="comment"># django · postgres · star-schema · rbac · 10-12 active users · founders' weekly review</span></p>
+        <p><span class="green">▸</span> <span class="kw">invoice-automation/</span> &nbsp;<span class="comment"># claude api · ~1,000 txns/month · 91% match rate · hive-partitioned GCS</span></p>
+        <p><span class="green">▸</span> <span class="kw">p-and-l-platform/</span> &nbsp;<span class="comment"># own monthly P&amp;L since Aug 2025 · SP-API + Shopify + Sheets · multi-currency</span></p>
+        <p><span class="green">▸</span> <span class="kw">pricing-app/</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># electron + react + postgres · multi-channel margin tool</span></p>
+        <p>&nbsp;</p>
+        <p><span class="green">▸</span> <span class="comment">stack:</span> python · postgres · bigquery · cloud run · cloud scheduler · django · claude api · power bi · apps script · github actions</p>
+        <p><span class="green">▸</span> <span class="comment">orchestration:</span> hybrid — cloud scheduler + airflow + apps script triggers</p>
+        <p><span class="green">▸</span> <span class="comment">savings:</span> ~€1,250/year from vendor migrations (Billbee→easybill, Calendly→Cal.com)</p>
+      </div>
+    </div>
+
+    <!-- psql query: projects -->
+    <div class="block">
+      <p class="cmdline"><span class="prompt"></span><span class="cmd">psql</span> <span class="flag">-d</span> <span class="path">portfolio</span> <span class="flag">-c</span> <span class="str">"SELECT name, year, stack FROM projects ORDER BY year DESC;"</span></p>
+      <div class="output">
+        <table class="ptable">
+          <thead>
+            <tr><th>name</th><th>year</th><th>stack</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="path">kpi_dashboard</td><td class="dim">2025</td>
+              <td>Django, PostgreSQL, Power BI, Notion API, RBAC</td>
+            </tr>
+            <tr>
+              <td class="path">invoice_automation</td><td class="dim">2026</td>
+              <td>Claude API, Python, GCS, Cloud Scheduler, Gmail API</td>
+            </tr>
+            <tr>
+              <td class="path">pnl_platform</td><td class="dim">2025</td>
+              <td>PostgreSQL, BigQuery, Amazon SP-API, Shopify, Python</td>
+            </tr>
+            <tr>
+              <td class="path">pricing_margin_app</td><td class="dim">2026</td>
+              <td>Electron, React 19, MUI, PostgreSQL, Node</td>
+            </tr>
+            <tr>
+              <td class="path">seoul_bike_thesis</td><td class="dim">2026</td>
+              <td>PyTorch, TensorFlow, XGBoost — TCN+LSTM, 88.83% R²</td>
+            </tr>
+            <tr>
+              <td class="path">speech2insight</td><td class="dim">2025</td>
+              <td>Whisper, HuggingFace, Streamlit, Docker, GHCR</td>
+            </tr>
+            <tr>
+              <td class="path">bollywood_pulse</td><td class="dim">2026</td>
+              <td>Airflow, dbt, HuggingFace, XGBoost, AWS Athena</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>&nbsp;</p>
+        <p class="dim">(7 rows · 4.2 ms)</p>
+      </div>
+    </div>
+
+    <!-- ./projects/kpi-dashboard --describe -->
+    <div class="block">
+      <p class="cmdline"><span class="prompt"></span><span class="cmd">./projects/kpi_dashboard</span> <span class="flag">--describe</span></p>
+      <div class="output">
+        <p><span class="ok">▸ kpi_dashboard</span> · internal data product · noritual lab · 2025</p>
+        <p>&nbsp;</p>
+        <p>Full internal web app, end-to-end with one teammate in ~2 months. Scoped requirements with the team, designed a star-schema Postgres backend, built a Django UI with full CRUD, role-based access (user / admin / founder), and forgot-password flow.</p>
+        <p>&nbsp;</p>
+        <p><span class="green">→</span> ingests from Notion API, Google Sheets, and direct UI inputs</p>
+        <p><span class="green">→</span> 10–12 active users · founders' weekly review meetings</p>
+        <p><span class="green">→</span> single source of truth for team performance + plan tracking</p>
+        <p>&nbsp;</p>
+        <p class="comment">// hardest part: getting RBAC right with three roles and a forgot-password flow that wouldn't make the founder hate me.</p>
+      </div>
+    </div>
+
+    <!-- ./projects/invoice-automation --describe -->
+    <div class="block">
+      <p class="cmdline"><span class="prompt"></span><span class="cmd">./projects/invoice_automation</span> <span class="flag">--describe</span></p>
+      <div class="output">
+        <p><span class="ok">▸ invoice_automation</span> · production claude api · noritual lab · 2026</p>
+        <p>&nbsp;</p>
+        <p>Processes <span class="num">~1,000</span> transactions/month. Classifies which need invoices (~25% do), then matches each to its PDF with confidence-scored Claude API screening. Hive-style partitioned GCS layout (<span class="path">raw/ → accepted/ → trash/</span>) for clean backfills and audit.</p>
+        <p>&nbsp;</p>
+        <p><span class="green">→</span> claude API for screening + confidence-scored matching</p>
+        <p><span class="green">→</span> three-way match: PO ↔ goods receipt ↔ invoice</p>
+        <p><span class="green">→</span> replaced accountant fees on transaction-linking</p>
+        <p>&nbsp;</p>
+        <p class="comment">// the hardest problem i'm proud of solving — invoice/PO matching at scale.</p>
+      </div>
+    </div>
+
+    <!-- which skills -->
+    <div class="block">
+      <p class="cmdline"><span class="prompt"></span><span class="cmd">which</span> <span class="flag">-a</span> <span class="kw">skills</span></p>
+      <div class="output">
+        <p><span class="green">/usr/local/bin/production-grade:</span></p>
+        <p>&nbsp;&nbsp;python · sql · postgres · bigquery · claude api · langchain · langgraph · rag · django · docker · github actions · dimensional modeling</p>
+        <p>&nbsp;</p>
+        <p><span class="amber">/usr/local/bin/hands-on:</span></p>
+        <p>&nbsp;&nbsp;power bi · tableau · looker studio · pandas · pydantic · streamlit · sp-api · shopify api · notion api · cloud run · cloud scheduler · gcs</p>
+        <p>&nbsp;</p>
+        <p><span class="cyan">/usr/local/bin/growing:</span></p>
+        <p>&nbsp;&nbsp;snowflake · dbt · aws · spark · kafka · airflow-at-scale · sap hana</p>
+        <p>&nbsp;</p>
+        <p><span class="err">/usr/local/bin/honest-gaps:</span></p>
+        <p>&nbsp;&nbsp;terraform · azure · deep SAP modules · dbt-at-scale</p>
+      </div>
+    </div>
+
+    <!-- tail -f /var/log/now -->
+    <div class="block">
+      <p class="cmdline"><span class="prompt"></span><span class="cmd">tail</span> <span class="flag">-f</span> <span class="path">/var/log/now</span></p>
+      <div class="output" id="live-log">
+        <p class="dim">[2026-05-28 19:54:01] <span class="green">●</span> running monthly P&amp;L close for May</p>
+        <p class="dim">[2026-05-28 19:54:02] <span class="green">●</span> scaling invoice pipeline · target 1.5k tx/mo</p>
+        <p class="dim">[2026-05-28 19:54:03] <span class="amber">○</span> open to data eng / analytics eng / AI eng roles</p>
+        <p class="dim">[2026-05-28 19:54:04] <span class="cyan">○</span> german: B1, ramping to B2</p>
+        <p class="dim">[2026-05-28 19:54:05] <span class="cursor"></span></p>
+      </div>
+    </div>
+
+    <!-- contact form-ish -->
+    <div class="block">
+      <p class="cmdline"><span class="prompt"></span><span class="cmd">curl</span> <span class="flag">-X POST</span> <span class="path">utkarsh.sawant21@gmail.com</span></p>
+      <div class="output">
+        <p>If you're looking for a data engineer who ships, or just want to swap notes on Airflow / LLMs / German bureaucracy — write to <a href="mailto:utkarsh.sawant21@gmail.com">utkarsh.sawant21@gmail.com</a>.</p>
+        <p>&nbsp;</p>
+        <p>I read everything. I reply to most.</p>
+      </div>
+    </div>
+
+    <p><span class="prompt"></span><span class="typed-cursor"></span></p>
+
+    <p class="footnote">
+      portfolio.theme = <span class="kw">operator</span> · v0.1 preview · <a href="../index.html">../back to main site</a> · <a href="https://github.com/utkarshsawant65/Portfolio-website" target="_blank" rel="noopener">source</a>
+    </p>
+  </div>
+
+  <script>
+    // last-login timestamp = page load time, formatted unix-style
+    const d = new Date();
+    const pad = (n) => String(n).padStart(2, '0');
+    const stamp = `${pad(d.getDate())} ${d.toLocaleString('en', { month: 'short' })} ${d.getHours()}:${pad(d.getMinutes())}`;
+    const el = document.getElementById('last-login');
+    if (el) el.textContent = stamp;
+  </script>
+</body>
+</html>

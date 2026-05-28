@@ -171,8 +171,8 @@ body[data-bg="erd"]       .bg-erd {
 /* -- erd variant: ghost ER diagram, static -- */
 .bg-erd svg { width: 100%; height: 100%; opacity: 0.7; }
 
-/* -- bg switcher (temporary A/B widget) -- */
-.bg-switcher {
+/* -- preview themes nav (temporary while choosing new design) -- */
+.preview-nav {
   position: fixed;
   bottom: 20px; right: 20px;
   z-index: 100;
@@ -186,27 +186,31 @@ body[data-bg="erd"]       .bg-erd {
   font-family: 'JetBrains Mono', ui-monospace, monospace;
   font-size: 11px;
 }
-.bg-switcher-label { color: var(--text-mute); padding: 0 6px; }
-.bg-switcher button {
-  background: transparent;
+.preview-nav-label { color: var(--text-mute); padding: 0 6px; }
+.preview-nav a {
   color: var(--text-dim);
+  text-decoration: none;
   border: 1px solid transparent;
   padding: 5px 10px;
   border-radius: 999px;
-  cursor: pointer;
-  font-family: inherit;
-  font-size: inherit;
   transition: color 0.2s, background 0.2s, border-color 0.2s;
 }
-.bg-switcher button:hover { color: var(--text); border-color: var(--border); }
-.bg-switcher button.is-active {
-  color: var(--bg);
-  background: var(--accent-2);
-  border-color: var(--accent-2);
+.preview-nav a:hover { color: var(--text); border-color: var(--border); }
+.preview-nav a.is-pending {
+  opacity: 0.4;
+  pointer-events: none;
+  position: relative;
+}
+.preview-nav a.is-pending::after {
+  content: 'soon';
+  position: absolute;
+  top: -6px; right: -4px;
+  font-size: 8px;
+  color: var(--accent-3);
 }
 @media (max-width: 720px) {
-  .bg-switcher { bottom: 12px; right: 12px; padding: 4px 6px; font-size: 10px; }
-  .bg-switcher button { padding: 4px 8px; }
+  .preview-nav { bottom: 12px; right: 12px; padding: 4px 6px; font-size: 10px; }
+  .preview-nav a { padding: 4px 8px; }
 }
 
 .cursor-glow {
