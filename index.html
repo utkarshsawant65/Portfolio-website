@@ -1,0 +1,569 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Utkarsh Sawant · Data Engineer</title>
+  <meta name="description" content="Utkarsh Sawant. Data engineer building cloud-native pipelines, LLM-integrated automation, and ML systems. Based in Germany." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body data-bg="kpi">
+  <!-- background variants (only the one matching [data-bg] on body is shown) -->
+  <canvas id="bg-canvas" class="bg-layer bg-particles" aria-hidden="true"></canvas>
+  <div class="grid-overlay bg-layer bg-particles" aria-hidden="true"></div>
+
+  <!-- v2: live KPI ticker (realistic metrics + timestamps streaming) -->
+  <div class="bg-layer bg-kpi" aria-hidden="true">
+    <pre class="kpi-stream"></pre>
+    <pre class="kpi-stream kpi-stream--b"></pre>
+  </div>
+
+  <!-- v2: labeled real-pipeline DAG -->
+  <div class="bg-layer bg-dag2" aria-hidden="true">
+    <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" width="100%" height="100%">
+      <g class="dag2-edges" stroke="rgba(124,92,255,0.28)" stroke-width="1.2" fill="none">
+        <path id="e1" d="M 240,160 C 380,160 420,300 560,300"/>
+        <path id="e2" d="M 240,320 C 380,320 420,300 560,300"/>
+        <path id="e3" d="M 240,480 C 380,480 420,460 560,460"/>
+        <path id="e4" d="M 240,640 C 380,640 420,640 560,640"/>
+        <path id="e5" d="M 720,300 C 860,300 900,380 1040,380"/>
+        <path id="e6" d="M 720,460 C 860,460 900,460 1040,460"/>
+        <path id="e7" d="M 720,640 C 860,640 900,540 1040,540"/>
+        <path id="e8" d="M 1200,380 C 1320,380 1340,460 1460,460"/>
+        <path id="e9" d="M 1200,460 C 1320,460 1340,460 1460,460"/>
+        <path id="e10" d="M 1200,540 C 1320,540 1340,460 1460,460"/>
+      </g>
+      <g class="dag2-nodes" font-family="JetBrains Mono, monospace" font-size="13">
+        <g transform="translate(140,140)"><rect width="200" height="40" rx="6" fill="rgba(15,15,23,0.85)" stroke="rgba(0,225,255,0.5)"/><text x="100" y="25" text-anchor="middle" fill="#a8a8b8">SP-API · orders</text></g>
+        <g transform="translate(140,300)"><rect width="200" height="40" rx="6" fill="rgba(15,15,23,0.85)" stroke="rgba(0,225,255,0.5)"/><text x="100" y="25" text-anchor="middle" fill="#a8a8b8">Shopify · DTC</text></g>
+        <g transform="translate(140,460)"><rect width="200" height="40" rx="6" fill="rgba(15,15,23,0.85)" stroke="rgba(0,225,255,0.5)"/><text x="100" y="25" text-anchor="middle" fill="#a8a8b8">Sheets · finance</text></g>
+        <g transform="translate(140,620)"><rect width="200" height="40" rx="6" fill="rgba(15,15,23,0.85)" stroke="rgba(0,225,255,0.5)"/><text x="100" y="25" text-anchor="middle" fill="#a8a8b8">Notion · KPI defs</text></g>
+        <g transform="translate(560,280)"><rect width="160" height="40" rx="6" fill="rgba(15,15,23,0.85)" stroke="rgba(124,92,255,0.5)"/><text x="80" y="25" text-anchor="middle" fill="#a8a8b8">stg_orders</text></g>
+        <g transform="translate(560,440)"><rect width="160" height="40" rx="6" fill="rgba(15,15,23,0.85)" stroke="rgba(124,92,255,0.5)"/><text x="80" y="25" text-anchor="middle" fill="#a8a8b8">stg_txns</text></g>
+        <g transform="translate(560,620)"><rect width="160" height="40" rx="6" fill="rgba(15,15,23,0.85)" stroke="rgba(124,92,255,0.5)"/><text x="80" y="25" text-anchor="middle" fill="#a8a8b8">stg_kpi</text></g>
+        <g transform="translate(1040,360)"><rect width="160" height="40" rx="6" fill="rgba(15,15,23,0.85)" stroke="rgba(255,92,176,0.5)"/><text x="80" y="25" text-anchor="middle" fill="#a8a8b8">fct_orders</text></g>
+        <g transform="translate(1040,440)"><rect width="160" height="40" rx="6" fill="rgba(15,15,23,0.85)" stroke="rgba(255,92,176,0.5)"/><text x="80" y="25" text-anchor="middle" fill="#a8a8b8">fct_pnl</text></g>
+        <g transform="translate(1040,520)"><rect width="160" height="40" rx="6" fill="rgba(15,15,23,0.85)" stroke="rgba(255,92,176,0.5)"/><text x="80" y="25" text-anchor="middle" fill="#a8a8b8">mart_kpi</text></g>
+        <g transform="translate(1380,440)"><rect width="160" height="40" rx="6" fill="rgba(15,15,23,0.85)" stroke="rgba(0,225,255,0.7)"/><text x="80" y="25" text-anchor="middle" fill="#e8e8ee">dashboard</text></g>
+      </g>
+      <g class="dag2-pulses" fill="#00e1ff">
+        <circle r="3"><animateMotion dur="6s" repeatCount="indefinite"><mpath href="#e1"/></animateMotion></circle>
+        <circle r="3"><animateMotion dur="7s" begin="1s" repeatCount="indefinite"><mpath href="#e3"/></animateMotion></circle>
+        <circle r="3"><animateMotion dur="6.5s" begin="2.5s" repeatCount="indefinite"><mpath href="#e5"/></animateMotion></circle>
+        <circle r="3"><animateMotion dur="6s" begin="3.5s" repeatCount="indefinite"><mpath href="#e6"/></animateMotion></circle>
+        <circle r="3"><animateMotion dur="5.5s" begin="4.5s" repeatCount="indefinite"><mpath href="#e9"/></animateMotion></circle>
+      </g>
+    </svg>
+  </div>
+
+  <!-- v2: typing terminal prompt -->
+  <div class="bg-layer bg-prompt" aria-hidden="true">
+    <pre class="prompt-window">
+<span class="prompt-header mono">noritual@prod-warehouse · psql 15.4</span>
+<span class="prompt-line mono"><span class="prompt-ps">noritual=&gt;</span> <span class="prompt-typed"></span><span class="prompt-cursor">_</span></span>
+    </pre>
+  </div>
+
+  <!-- v2: ER diagram ghost -->
+  <div class="bg-layer bg-erd" aria-hidden="true">
+    <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" width="100%" height="100%" font-family="JetBrains Mono, monospace" font-size="12">
+      <g stroke="rgba(124,92,255,0.22)" stroke-width="1" fill="none">
+        <path d="M 320,260 C 460,260 520,420 660,420"/>
+        <path d="M 320,540 C 460,540 520,460 660,460"/>
+        <path d="M 980,420 C 1120,420 1180,260 1320,260"/>
+        <path d="M 980,460 C 1120,460 1180,540 1320,540"/>
+      </g>
+      <g class="erd-tables">
+        <g transform="translate(160,200)">
+          <rect width="260" height="180" rx="4" fill="rgba(15,15,23,0.7)" stroke="rgba(0,225,255,0.35)"/>
+          <text x="14" y="26" fill="#00e1ff">fct_orders</text>
+          <line x1="0" y1="38" x2="260" y2="38" stroke="rgba(0,225,255,0.25)"/>
+          <text x="14" y="60" fill="#a8a8b8">order_id      PK uuid</text>
+          <text x="14" y="80" fill="#a8a8b8">sku_id        FK uuid</text>
+          <text x="14" y="100" fill="#a8a8b8">channel       text</text>
+          <text x="14" y="120" fill="#a8a8b8">order_date    timestamp</text>
+          <text x="14" y="140" fill="#a8a8b8">revenue_eur   numeric</text>
+          <text x="14" y="160" fill="#a8a8b8">cogs_eur      numeric</text>
+        </g>
+        <g transform="translate(160,480)">
+          <rect width="260" height="160" rx="4" fill="rgba(15,15,23,0.7)" stroke="rgba(124,92,255,0.35)"/>
+          <text x="14" y="26" fill="#7c5cff">fct_invoices</text>
+          <line x1="0" y1="38" x2="260" y2="38" stroke="rgba(124,92,255,0.25)"/>
+          <text x="14" y="60" fill="#a8a8b8">invoice_id    PK uuid</text>
+          <text x="14" y="80" fill="#a8a8b8">txn_id        FK uuid</text>
+          <text x="14" y="100" fill="#a8a8b8">vendor_name   text</text>
+          <text x="14" y="120" fill="#a8a8b8">amount_eur    numeric</text>
+          <text x="14" y="140" fill="#a8a8b8">match_conf    numeric</text>
+        </g>
+        <g transform="translate(660,380)">
+          <rect width="320" height="160" rx="4" fill="rgba(15,15,23,0.7)" stroke="rgba(255,92,176,0.35)"/>
+          <text x="14" y="26" fill="#ff5cb0">mart_pnl_monthly</text>
+          <line x1="0" y1="38" x2="320" y2="38" stroke="rgba(255,92,176,0.25)"/>
+          <text x="14" y="60" fill="#a8a8b8">month         PK date</text>
+          <text x="14" y="80" fill="#a8a8b8">revenue_total numeric</text>
+          <text x="14" y="100" fill="#a8a8b8">cogs_total    numeric</text>
+          <text x="14" y="120" fill="#a8a8b8">opex_total    numeric</text>
+          <text x="14" y="140" fill="#a8a8b8">net_margin    numeric</text>
+        </g>
+        <g transform="translate(1320,200)">
+          <rect width="220" height="140" rx="4" fill="rgba(15,15,23,0.7)" stroke="rgba(0,225,255,0.35)"/>
+          <text x="14" y="26" fill="#00e1ff">dim_sku</text>
+          <line x1="0" y1="38" x2="220" y2="38" stroke="rgba(0,225,255,0.25)"/>
+          <text x="14" y="60" fill="#a8a8b8">sku_id    PK uuid</text>
+          <text x="14" y="80" fill="#a8a8b8">sku_name  text</text>
+          <text x="14" y="100" fill="#a8a8b8">category  text</text>
+          <text x="14" y="120" fill="#a8a8b8">launched  date</text>
+        </g>
+        <g transform="translate(1320,480)">
+          <rect width="220" height="140" rx="4" fill="rgba(15,15,23,0.7)" stroke="rgba(0,225,255,0.35)"/>
+          <text x="14" y="26" fill="#00e1ff">dim_channel</text>
+          <line x1="0" y1="38" x2="220" y2="38" stroke="rgba(0,225,255,0.25)"/>
+          <text x="14" y="60" fill="#a8a8b8">channel_id  PK</text>
+          <text x="14" y="80" fill="#a8a8b8">name        text</text>
+          <text x="14" y="100" fill="#a8a8b8">fee_pct     numeric</text>
+          <text x="14" y="120" fill="#a8a8b8">currency    text</text>
+        </g>
+      </g>
+    </svg>
+  </div>
+
+  <!-- background switcher (temporary, for A/B testing) -->
+  <div class="bg-switcher" role="group" aria-label="background style">
+    <span class="bg-switcher-label mono">// bg</span>
+    <button type="button" data-bg-pick="particles" title="particles + grid (baseline)">particles</button>
+    <button type="button" data-bg-pick="kpi" title="live KPI ticker">kpi</button>
+    <button type="button" data-bg-pick="dag2" title="labeled DAG pipeline">dag v2</button>
+    <button type="button" data-bg-pick="prompt" title="typing psql prompt">prompt</button>
+    <button type="button" data-bg-pick="erd" title="ER diagram ghost">erd</button>
+  </div>
+
+  <div class="cursor-glow" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <a href="#home" class="brand">
+      <span class="brand-dot"></span>
+      <span class="brand-text">utkarsh<span class="brand-accent">.sawant</span></span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="primary-nav" aria-label="Primary">
+      <ul>
+        <li><a href="#home" data-nav>home</a></li>
+        <li><a href="#about" data-nav>about</a></li>
+        <li><a href="#stack" data-nav>stack</a></li>
+        <li><a href="#thinking" data-nav>thinking</a></li>
+        <li><a href="#projects" data-nav>projects</a></li>
+        <li><a href="#experience" data-nav>experience</a></li>
+        <li><a href="#contact" data-nav>contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section id="home" class="hero">
+      <div class="hero-meta" data-animate>
+        <span class="status-dot"></span>
+        <span class="mono">available_for_hire == true</span>
+      </div>
+      <h1 class="hero-title">
+        <span class="line" data-animate><span class="muted">&gt;</span> From <em>raw data</em></span>
+        <span class="line" data-animate>to <span class="grad">decisions.</span></span>
+      </h1>
+      <p class="hero-sub" data-animate>
+        Data engineer based in Germany. I own the full data stack — ingest,
+        warehouse, pipelines, LLM automation, and BI — so small teams get
+        numbers they can actually trust.
+      </p>
+      <div class="hero-cta" data-animate>
+        <a href="#projects" class="btn btn-primary">
+          <span>see the work</span>
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+      <div class="scroll-hint" aria-hidden="true">
+        <span>scroll</span>
+        <div class="scroll-line"></div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="section">
+      <div class="section-head" data-animate>
+        <span class="section-num mono">01</span>
+        <h2>about<span class="dot">.</span></h2>
+      </div>
+      <div class="about-grid">
+        <div class="about-text" data-animate>
+          <p class="lead">
+            I'm <strong>Utkarsh</strong>, a data engineer who likes the messy middle:
+            the place where business problems become schemas, schemas become pipelines,
+            and pipelines become decisions.
+          </p>
+          <p>
+            Right now I'm <strong>the entire data &amp; automation function</strong>
+            at <strong>Noritual Lab</strong>, a matcha e-commerce startup in Berlin.
+            Solo DE reporting to the founder. I picked the stack, stood up the
+            warehouse, and own everything from <span class="mono inline">CREATE SCHEMA</span>
+            to the KPI dashboard founders open every Monday. Before that I worked
+            on agentic AI research at <strong>BioMed X</strong> (Heidelberg), and I
+            hold an <strong>MS in Applied Data Science &amp; Analytics</strong>
+            from SRH Heidelberg (GPA 1.9).
+          </p>
+          <p>
+            I care about systems that are <em>actually used</em>: small, debuggable,
+            documented, and cheap to run. In a typical week I'm writing DAGs,
+            shipping Django, generating the monthly P&amp;L, and tuning a
+            Claude-API invoice classifier — all in the same repo.
+          </p>
+          <p class="now-line">
+            <span class="mono now-label">// now</span>
+            running Noritual's monthly P&amp;L · scaling the invoice pipeline · open to data eng &amp; AI eng roles.
+          </p>
+        </div>
+        <aside class="about-card" data-animate>
+          <div class="card-header mono">~/utkarsh --whoami</div>
+          <dl>
+            <dt>role</dt><dd>Data Engineer · Noritual Lab</dd>
+            <dt>based</dt><dd>Mannheim / Berlin 🇩🇪</dd>
+            <dt>edu</dt><dd>MS Data Science · SRH Heidelberg</dd>
+            <dt>focus</dt><dd>pipelines · warehouses · LLMs · BI</dd>
+            <dt>open to</dt><dd>Data Eng · Analytics Eng · AI Eng</dd>
+          </dl>
+        </aside>
+      </div>
+    </section>
+
+    <!-- STACK -->
+    <section id="stack" class="section">
+      <div class="section-head" data-animate>
+        <span class="section-num mono">02</span>
+        <h2>stack<span class="dot">.</span></h2>
+      </div>
+      <div class="stack-grid">
+        <article class="stack-card" data-animate>
+          <header><h3>data &amp; pipelines</h3></header>
+          <ul class="chips">
+            <li>Python</li><li>SQL</li><li>pandas</li><li>PostgreSQL</li>
+            <li>BigQuery</li><li>Airflow</li><li>Cloud Scheduler</li>
+            <li>Apps Script</li><li>dbt</li>
+          </ul>
+        </article>
+        <article class="stack-card" data-animate>
+          <header><h3>cloud &amp; infra</h3></header>
+          <ul class="chips">
+            <li>GCP</li><li>Cloud Run</li><li>Cloud SQL</li>
+            <li>Pub/Sub</li><li>GCS</li><li>Secret Manager</li>
+            <li>Docker</li><li>GitHub Actions</li>
+          </ul>
+        </article>
+        <article class="stack-card" data-animate>
+          <header><h3>ai &amp; llms</h3></header>
+          <ul class="chips">
+            <li>Claude API</li><li>LangChain</li><li>LangGraph</li>
+            <li>RAG</li><li>Milvus</li><li>LangSmith</li>
+            <li>HuggingFace</li><li>Whisper</li>
+          </ul>
+        </article>
+        <article class="stack-card" data-animate>
+          <header><h3>apps &amp; bi</h3></header>
+          <ul class="chips">
+            <li>Django</li><li>Streamlit</li><li>Power BI</li>
+            <li>Electron</li><li>React</li><li>FastAPI</li>
+            <li>TypeScript</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- HOW I THINK -->
+    <section id="thinking" class="section">
+      <div class="section-head" data-animate>
+        <span class="section-num mono">03</span>
+        <h2>how I work<span class="dot">.</span></h2>
+        <p class="section-sub">a few things I believe about building data systems.</p>
+      </div>
+      <div class="principles">
+        <article class="principle" data-animate>
+          <span class="principle-num mono">i.</span>
+          <h3>boring beats clever.</h3>
+          <p>An ugly cron job in production beats an elegant DAG in a notebook. Ship small, iterate, log everything.</p>
+        </article>
+        <article class="principle" data-animate>
+          <span class="principle-num mono">ii.</span>
+          <h3>pipelines serve a question.</h3>
+          <p>Every pipeline exists to answer something someone actually asks, not to look good in a diagram.</p>
+        </article>
+        <article class="principle" data-animate>
+          <span class="principle-num mono">iii.</span>
+          <h3>docs are part of done.</h3>
+          <p>A README, a runbook, a diagram. Every project. If the next engineer can't find it, it doesn't exist.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="section">
+      <div class="section-head" data-animate>
+        <span class="section-num mono">04</span>
+        <h2>selected work<span class="dot">.</span></h2>
+        <p class="section-sub">seven pieces. from production pipelines to research code.</p>
+      </div>
+
+      <div class="project-filters" role="tablist" data-animate>
+        <button class="chip-filter is-active" data-filter="all" type="button">all</button>
+        <button class="chip-filter" data-filter="infra" type="button">infra</button>
+        <button class="chip-filter" data-filter="data" type="button">data</button>
+        <button class="chip-filter" data-filter="llm" type="button">llm</button>
+        <button class="chip-filter" data-filter="ml" type="button">ml</button>
+        <button class="chip-filter" data-filter="app" type="button">app</button>
+      </div>
+
+      <div class="project-list">
+
+        <article class="project" data-tags="app data" data-animate>
+          <div class="project-meta">
+            <span class="mono tag">noritual lab · production</span>
+            <span class="mono year">2025</span>
+          </div>
+          <h3>kpi dashboard · internal data product</h3>
+          <p class="project-blurb">
+            Full internal web app, end-to-end with one teammate in ~2 months.
+            Scoped requirements with the team, designed a star-schema Postgres
+            backend, built a Django UI with CRUD, role-based access (user /
+            admin / founder), and forgot-password flow. Ingests from Notion API,
+            Google Sheets, and direct UI inputs.
+            <span class="why">single source of truth for founders' weekly review meetings. 10–12 active users.</span>
+          </p>
+          <ul class="project-tech">
+            <li>Django</li><li>PostgreSQL</li><li>Power BI</li>
+            <li>Notion API</li><li>GCP VM</li><li>RBAC</li>
+          </ul>
+        </article>
+
+        <article class="project" data-tags="llm data infra" data-animate>
+          <div class="project-meta">
+            <span class="mono tag">noritual lab · production</span>
+            <span class="mono year">2026</span>
+          </div>
+          <h3>invoice automation · claude api in prod</h3>
+          <p class="project-blurb">
+            Processes <strong>~1,000 transactions/month</strong>: classifies
+            which need invoices (~25% do), then matches each one to its PDF
+            with confidence-scored Claude API screening. Hive-style partitioned
+            GCS layout (raw → accepted → trash) for clean backfills and audit.
+            Replaced accountant fees previously spent on transaction-linking.
+            <span class="why">the hardest problem I'm proud of solving — invoice/PO matching at scale.</span>
+          </p>
+          <ul class="project-tech">
+            <li>Claude API</li><li>Python</li><li>GCS</li>
+            <li>Cloud Scheduler</li><li>Gmail API</li><li>pdfplumber</li>
+          </ul>
+        </article>
+
+        <article class="project" data-tags="infra data" data-animate>
+          <div class="project-meta">
+            <span class="mono tag">noritual lab · production</span>
+            <span class="mono year">2025</span>
+          </div>
+          <h3>p&amp;l data platform · monthly close</h3>
+          <p class="project-blurb">
+            Own the company's monthly P&amp;L process since Aug 2025. Designed
+            the P&amp;L data model end-to-end, built a dedicated Postgres DB
+            ingesting from Amazon SP-API, Shopify, and Sheets. Multi-currency
+            FX conversion, three-way matching (PO ↔ goods receipt ↔ invoice),
+            month-end close support.
+            <span class="why">replaced the founder's prior (inaccurate) self-built P&amp;L with an owned, defensible monthly cadence.</span>
+          </p>
+          <ul class="project-tech">
+            <li>PostgreSQL</li><li>BigQuery</li><li>Amazon SP-API</li>
+            <li>Shopify API</li><li>Python</li><li>dbt-style layering</li>
+          </ul>
+        </article>
+
+        <article class="project" data-tags="app data" data-animate>
+          <div class="project-meta">
+            <span class="mono tag">noritual lab · v1.0</span>
+            <span class="mono year">2026</span>
+          </div>
+          <h3>pricing &amp; margin desktop app</h3>
+          <p class="project-blurb">
+            Electron + React desktop tool for multi-channel pricing analysis.
+            Three calculation modes, channel-specific COGS, editable fee
+            configuration, and a real-time margin dashboard backed by Postgres.
+            <span class="why">real margin visibility per channel in one click.</span>
+          </p>
+          <ul class="project-tech">
+            <li>Electron</li><li>React 19</li><li>MUI</li>
+            <li>PostgreSQL</li><li>Node</li><li>Jest</li>
+          </ul>
+        </article>
+
+        <article class="project" data-tags="ml" data-animate>
+          <div class="project-meta">
+            <span class="mono tag">thesis · research</span>
+            <span class="mono year">2026</span>
+          </div>
+          <h3>seoul bike demand forecasting</h3>
+          <p class="project-blurb">
+            Master's thesis comparing 7 deep architectures (LSTM, TCN,
+            TCN-LSTM, attention variants) for hourly demand forecasting.
+            Best model: <strong>Multi-Scale TCN+LSTM at 88.83% R²</strong>.
+            Identified and corrected a data-leakage flaw in the original
+            published benchmark.
+          </p>
+          <ul class="project-tech">
+            <li>PyTorch</li><li>TensorFlow</li><li>XGBoost</li>
+            <li>scikit-learn</li><li>pandas</li>
+          </ul>
+        </article>
+
+        <article class="project" data-tags="data ml" data-animate>
+          <div class="project-meta">
+            <span class="mono tag">side project · scoped</span>
+            <span class="mono year">2026</span>
+          </div>
+          <h3>bollywood pulse · music intel</h3>
+          <p class="project-blurb">
+            12-week flagship build: Airflow, dbt, multilingual NLP
+            (Hindi, Punjabi, English), XGBoost trend prediction, Streamlit
+            dashboard. Cross-platform fuzzy matching across Spotify, YouTube,
+            Genius, with MLflow tracking and a silent GitHub Actions collector.
+            <span class="why">early-signal layer for trend bets, not post-hoc charts.</span>
+          </p>
+          <ul class="project-tech">
+            <li>Airflow</li><li>dbt</li><li>HuggingFace</li>
+            <li>XGBoost</li><li>AWS Athena</li><li>Streamlit</li>
+          </ul>
+        </article>
+
+        <article class="project" data-tags="llm ml" data-animate>
+          <div class="project-meta">
+            <span class="mono tag">open source</span>
+            <span class="mono year">2025</span>
+          </div>
+          <h3>speech2insight · audio NLP pipeline</h3>
+          <p class="project-blurb">
+            5-stage pipeline taking audio to insight: Whisper transcription,
+            sentiment (TextBlob + DistilRoBERTa), LSA topic modeling,
+            T5 chunked summarization with BLEU/ROUGE eval. Dockerised with
+            ffmpeg bundled, full CI/CD on GHCR.
+          </p>
+          <ul class="project-tech">
+            <li>Whisper</li><li>HuggingFace</li><li>Streamlit</li>
+            <li>Docker</li><li>GitHub Actions</li>
+          </ul>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience" class="section">
+      <div class="section-head" data-animate>
+        <span class="section-num mono">05</span>
+        <h2>experience<span class="dot">.</span></h2>
+      </div>
+      <ol class="timeline">
+        <li class="timeline-item" data-animate>
+          <div class="timeline-when mono">May 2025 — current</div>
+          <div class="timeline-what">
+            <h3>Data Engineer · Noritual Lab (Berlin)</h3>
+            <p>
+              Solo data &amp; automation engineer at a matcha e-commerce startup.
+              Reports to the founder. Own the GCP/Postgres warehouse, the KPI
+              dashboard (Django, 10–12 users), monthly P&amp;L close, and a
+              Claude-API invoice pipeline processing ~1,000 transactions/month.
+              Vendor migrations saved ~€1,250/year.
+            </p>
+          </div>
+        </li>
+        <li class="timeline-item" data-animate>
+          <div class="timeline-when mono">Oct 2024 — Mar 2025</div>
+          <div class="timeline-what">
+            <h3>Research Student, Agentic AI · BioMed X (Heidelberg)</h3>
+            <p>
+              Built a multi-agent system with LangGraph + LangChain for academic
+              paper discovery and retrieval. RAG pipeline on Milvus, Streamlit
+              front-end, Docker, CI/CD, LangSmith observability.
+            </p>
+          </div>
+        </li>
+        <li class="timeline-item" data-animate>
+          <div class="timeline-when mono">Apr 2024 — Mar 2026</div>
+          <div class="timeline-what">
+            <h3>MS Applied Data Science &amp; Analytics · SRH Heidelberg</h3>
+            <p>
+              GPA 1.9 (German scale · high distinction). Thesis on hybrid
+              TCN-LSTM architectures for demand forecasting (best model 88.83%
+              R²) — identified a data-leakage flaw in the published CUBIST
+              benchmark paper.
+            </p>
+          </div>
+        </li>
+        <li class="timeline-item" data-animate>
+          <div class="timeline-when mono">Jul 2019 — May 2023</div>
+          <div class="timeline-what">
+            <h3>BE Computer Engineering · Mumbai University</h3>
+            <p>GPA 8.39 / 10.</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section contact">
+      <div class="section-head" data-animate>
+        <span class="section-num mono">06</span>
+        <h2>contact<span class="dot">.</span></h2>
+      </div>
+      <div class="contact-grid">
+        <div data-animate>
+          <p class="contact-lead">
+            Looking for a data engineer who ships? Or just want to swap notes
+            on Airflow, LLMs, or German bureaucracy?
+          </p>
+          <a href="mailto:utkarsh.sawant21@gmail.com" class="contact-mail">
+            utkarsh.sawant21@gmail.com
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H8M17 7v9"/></svg>
+          </a>
+        </div>
+        <ul class="contact-links" data-animate>
+          <li>
+            <a href="https://github.com/utkarshsawant65" target="_blank" rel="noopener">
+              <span class="mono">github</span>
+              <span>@utkarshsawant65</span>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.linkedin.com/in/utkarsh-sawant/" target="_blank" rel="noopener">
+              <span class="mono">linkedin</span>
+              <span>/in/utkarsh-sawant</span>
+            </a>
+          </li>
+          <li>
+            <a href="mailto:utkarsh.sawant21@gmail.com">
+              <span class="mono">email</span>
+              <span>utkarsh.sawant21@gmail.com</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div>
+      <span class="mono">© 2026 utkarsh sawant</span>
+      <span class="mono muted">// built with html, css, js &amp; coffee</span>
+    </div>
+    <div class="mono muted">v1.0 · live</div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
