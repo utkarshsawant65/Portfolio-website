@@ -171,47 +171,6 @@ body[data-bg="erd"]       .bg-erd {
 /* -- erd variant: ghost ER diagram, static -- */
 .bg-erd svg { width: 100%; height: 100%; opacity: 0.7; }
 
-/* -- preview themes nav (temporary while choosing new design) -- */
-.preview-nav {
-  position: fixed;
-  bottom: 20px; right: 20px;
-  z-index: 100;
-  display: flex; align-items: center; gap: 6px;
-  padding: 6px 8px;
-  background: rgba(15, 15, 23, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  font-family: 'JetBrains Mono', ui-monospace, monospace;
-  font-size: 11px;
-}
-.preview-nav-label { color: var(--text-mute); padding: 0 6px; }
-.preview-nav a {
-  color: var(--text-dim);
-  text-decoration: none;
-  border: 1px solid transparent;
-  padding: 5px 10px;
-  border-radius: 999px;
-  transition: color 0.2s, background 0.2s, border-color 0.2s;
-}
-.preview-nav a:hover { color: var(--text); border-color: var(--border); }
-.preview-nav a.is-pending {
-  opacity: 0.4;
-  pointer-events: none;
-  position: relative;
-}
-.preview-nav a.is-pending::after {
-  content: 'soon';
-  position: absolute;
-  top: -6px; right: -4px;
-  font-size: 8px;
-  color: var(--accent-3);
-}
-@media (max-width: 720px) {
-  .preview-nav { bottom: 12px; right: 12px; padding: 4px 6px; font-size: 10px; }
-  .preview-nav a { padding: 4px 8px; }
-}
 
 .cursor-glow {
   position: fixed;
@@ -480,15 +439,24 @@ body[data-bg="erd"]       .bg-erd {
   text-transform: uppercase;
 }
 .scroll-line {
-  width: 1px; height: 40px;
-  background: linear-gradient(to bottom, var(--text-mute), transparent);
-  animation: scroll-pulse 2s ease-in-out infinite;
+  position: relative;
+  width: 1px;
+  height: 48px;
+  background: rgba(255, 255, 255, 0.08);
+  overflow: hidden;
 }
-@keyframes scroll-pulse {
-  0% { transform: scaleY(0); transform-origin: top; }
-  50% { transform: scaleY(1); transform-origin: top; }
-  51% { transform-origin: bottom; }
-  100% { transform: scaleY(0); transform-origin: bottom; }
+.scroll-line::after {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 50%;
+  width: 100%;
+  background: var(--text);
+  animation: scroll-line-fill 1.8s ease-in-out infinite;
+}
+@keyframes scroll-line-fill {
+  0%   { transform: translateY(-100%); }
+  100% { transform: translateY(200%); }
 }
 
 /* ============ sections shared ============ */
@@ -636,6 +604,82 @@ body[data-bg="erd"]       .bg-erd {
   transition: color 0.2s var(--ease), border-color 0.2s var(--ease);
 }
 .stack-card:hover .chips li { color: var(--text); }
+
+/* ============ marquee (stack section replacement) ============ */
+
+.section-marquee .section-head { margin-bottom: 40px; }
+
+.marquee {
+  position: relative;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);  /* break out of the .shell width */
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 8px 0;
+  /* fade out at the edges so logos appear/disappear smoothly */
+  mask-image: linear-gradient(to right, transparent 0, black 8%, black 92%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0, black 8%, black 92%, transparent 100%);
+}
+.marquee-track {
+  overflow: hidden;
+  width: 100%;
+}
+.marquee-row {
+  display: inline-flex;
+  gap: 18px;
+  white-space: nowrap;
+  padding-right: 18px;
+}
+.marquee-row--ltr { animation: marquee-left 40s linear infinite; }
+.marquee-row--rtl { animation: marquee-right 45s linear infinite; }
+.marquee-row--slow { animation-duration: 60s; }
+
+@keyframes marquee-left {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@keyframes marquee-right {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
+
+.marquee-item {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  padding: 14px 26px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--text-dim);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  transition: color 0.25s var(--ease), border-color 0.25s var(--ease), background 0.25s var(--ease);
+}
+.marquee:hover .marquee-row { animation-play-state: paused; }
+.marquee-item:hover {
+  color: var(--text);
+  border-color: var(--accent-2);
+  background: var(--surface);
+}
+
+@media (max-width: 720px) {
+  .marquee-item { font-size: 13px; padding: 10px 18px; }
+  .marquee { gap: 12px; }
+  .marquee-row { gap: 12px; padding-right: 12px; }
+}
+
+/* ============ animated text (scroll-lit characters) ============ */
+
+[data-animate-text] .atxt-char {
+  opacity: 0.18;
+  transition: opacity 0.1s linear;
+  color: var(--text);
+}
 
 /* ============ principles (how I think) ============ */
 

@@ -282,16 +282,99 @@
   /* ---------- 5. magnetic buttons ---------- */
   const initMagnetic = () => {
     if (matchMedia('(max-width: 768px)').matches) return;
-    document.querySelectorAll('.btn').forEach((btn) => {
-      btn.addEventListener('mousemove', (e) => {
-        const r = btn.getBoundingClientRect();
-        const dx = e.clientX - (r.left + r.width / 2);
-        const dy = e.clientY - (r.top + r.height / 2);
-        btn.style.transform = `translate(${dx * 0.18}px, ${dy * 0.25}px)`;
+    // subtle: padding 80px, strength 4 (higher = gentler pull). Snap-back on release.
+    const PADDING = 80;
+    const STRENGTH = 4;
+    const ACTIVE_EASE = 'transform 0.3s ease-out';
+    const REST_EASE   = 'transform 0.6s ease-in-out';
+
+    document.querySelectorAll('.btn, .magnetic').forEach((el) => {
+      el.style.willChange = 'transform';
+      let active = false;
+      const onMove = (e) => {
+        const r = el.getBoundingClientRect();
+        const cx = r.left + r.width / 2;
+        const cy = r.top + r.height / 2;
+        const dx = e.clientX - cx;
+        const dy = e.clientY - cy;
+        const within = Math.abs(dx) < r.width / 2 + PADDING &&
+                       Math.abs(dy) < r.height / 2 + PADDING;
+        if (within) {
+          if (!active) { el.style.transition = ACTIVE_EASE; active = true; }
+          el.style.transform = `translate3d(${dx / STRENGTH}px, ${dy / STRENGTH}px, 0)`;
+        } else if (active) {
+          el.style.transition = REST_EASE;
+          el.style.transform = 'translate3d(0,0,0)';
+          active = false;
+        }
+      };
+      window.addEventListener('mousemove', onMove, { passive: true });
+    });
+  };
+
+  /* ---------- 5b. animated text (scroll-lit characters) ---------- */
+  const initAnimatedText = () => {
+    const targets = document.querySelectorAll('[data-animate-text]');
+    if (!targets.length) return;
+
+    targets.forEach((el) => {
+      const raw = el.textContent;
+      el.textContent = '';
+      // wrap each char in a span; preserve whole-word wrapping via word-spans
+      const words = raw.split(' ');
+      const allChars = [];
+      words.forEach((word, wi) => {
+        const wordSpan = document.createElement('span');
+        wordSpan.style.display = 'inline-block';
+        wordSpan.style.whiteSpace = 'nowrap';
+        Array.from(word).forEach((ch) => {
+          const charSpan = document.createElement('span');
+          charSpan.textContent = ch;
+          charSpan.className = 'atxt-char';
+          wordSpan.appendChild(charSpan);
+          allChars.push(charSpan);
+        });
+        el.appendChild(wordSpan);
+        if (wi < words.length - 1) {
+          el.appendChild(document.createTextNode(' '));
+        }
       });
-      btn.addEventListener('mouseleave', () => {
-        btn.style.transform = '';
-      });
+
+      // tie char opacity to scroll progress between [start 0.8] and [end 0.2]
+      // i.e. begins illuminating when top of paragraph passes 80% viewport,
+      // finishes when bottom of paragraph passes 20% viewport.
+      const update = () => {
+        const r = el.getBoundingClientRect();
+        const vh = window.innerHeight;
+        const start = vh * 0.8 - r.top;            // distance scrolled past trigger
+        const totalRange = (vh * 0.8) + r.height - (vh * 0.2);
+        const progress = Math.max(0, Math.min(1, start / totalRange));
+        const n = allChars.length;
+        allChars.forEach((c, i) => {
+          const charStart = i / n;
+          const charEnd = charStart + (1 / n);
+          // ramp from 0.2 -> 1 within the char's window
+          let op;
+          if (progress < charStart) op = 0.2;
+          else if (progress > charEnd) op = 1;
+          else op = 0.2 + 0.8 * ((progress - charStart) / (charEnd - charStart));
+          c.style.opacity = op;
+        });
+      };
+
+      update();
+      window.addEventListener('scroll', update, { passive: true });
+      window.addEventListener('resize', update);
+    });
+  };
+
+  /* ---------- 5c. logo marquee (replaces static stack section) ---------- */
+  const initLogoMarquee = () => {
+    const marquee = document.querySelector('[data-marquee]');
+    if (!marquee) return;
+    // duplicate the row contents once so the keyframe -50% translate loops seamlessly
+    marquee.querySelectorAll('.marquee-row').forEach((row) => {
+      row.innerHTML = row.innerHTML + row.innerHTML;
     });
   };
 
@@ -341,6 +424,8 @@
     initReveal();
     initNav();
     initMagnetic();
+    initAnimatedText();
+    initLogoMarquee();
     initTilt();
     initFilters();
   });

@@ -129,15 +129,6 @@
     </svg>
   </div>
 
-  <!-- preview pages (temporary, while choosing a new theme) -->
-  <div class="preview-nav" role="group" aria-label="theme previews">
-    <span class="preview-nav-label mono">// preview themes:</span>
-    <a href="preview/operator.html">operator</a>
-    <a href="preview/notebook.html" class="is-pending">notebook</a>
-    <a href="preview/console.html" class="is-pending">console</a>
-    <a href="preview/pipeline.html" class="is-pending">pipeline</a>
-  </div>
-
   <div class="cursor-glow" aria-hidden="true"></div>
 
   <header class="site-header">
@@ -197,11 +188,7 @@
       </div>
       <div class="about-grid">
         <div class="about-text" data-animate>
-          <p class="lead">
-            I'm <strong>Utkarsh</strong>, a data engineer who likes the messy middle:
-            the place where business problems become schemas, schemas become pipelines,
-            and pipelines become decisions.
-          </p>
+          <p class="lead" data-animate-text>I'm Utkarsh, a data engineer who likes the messy middle: the place where business problems become schemas, schemas become pipelines, and pipelines become decisions.</p>
           <p>
             Right now I'm <strong>the entire data &amp; automation function</strong>
             at <strong>Noritual Lab</strong>, a matcha e-commerce startup in Berlin.
@@ -237,44 +224,64 @@
     </section>
 
     <!-- STACK -->
-    <section id="stack" class="section">
+    <section id="stack" class="section section-marquee">
       <div class="section-head" data-animate>
         <span class="section-num mono">02</span>
         <h2>stack<span class="dot">.</span></h2>
+        <p class="section-sub">tools I use daily, weekly, or know well enough to ship with.</p>
       </div>
-      <div class="stack-grid">
-        <article class="stack-card" data-animate>
-          <header><h3>data &amp; pipelines</h3></header>
-          <ul class="chips">
-            <li>Python</li><li>SQL</li><li>pandas</li><li>PostgreSQL</li>
-            <li>BigQuery</li><li>Airflow</li><li>Cloud Scheduler</li>
-            <li>Apps Script</li><li>dbt</li>
-          </ul>
-        </article>
-        <article class="stack-card" data-animate>
-          <header><h3>cloud &amp; infra</h3></header>
-          <ul class="chips">
-            <li>GCP</li><li>Cloud Run</li><li>Cloud SQL</li>
-            <li>Pub/Sub</li><li>GCS</li><li>Secret Manager</li>
-            <li>Docker</li><li>GitHub Actions</li>
-          </ul>
-        </article>
-        <article class="stack-card" data-animate>
-          <header><h3>ai &amp; llms</h3></header>
-          <ul class="chips">
-            <li>Claude API</li><li>LangChain</li><li>LangGraph</li>
-            <li>RAG</li><li>Milvus</li><li>LangSmith</li>
-            <li>HuggingFace</li><li>Whisper</li>
-          </ul>
-        </article>
-        <article class="stack-card" data-animate>
-          <header><h3>apps &amp; bi</h3></header>
-          <ul class="chips">
-            <li>Django</li><li>Streamlit</li><li>Power BI</li>
-            <li>Electron</li><li>React</li><li>FastAPI</li>
-            <li>TypeScript</li>
-          </ul>
-        </article>
+      <div class="marquee" data-marquee data-animate>
+        <div class="marquee-track">
+          <div class="marquee-row marquee-row--ltr">
+            <span class="marquee-item">Python</span>
+            <span class="marquee-item">PostgreSQL</span>
+            <span class="marquee-item">BigQuery</span>
+            <span class="marquee-item">SQL</span>
+            <span class="marquee-item">Cloud Run</span>
+            <span class="marquee-item">Cloud Scheduler</span>
+            <span class="marquee-item">GCS</span>
+            <span class="marquee-item">Docker</span>
+            <span class="marquee-item">GitHub Actions</span>
+            <span class="marquee-item">Secret Manager</span>
+            <span class="marquee-item">Cloud SQL</span>
+            <span class="marquee-item">Pub/Sub</span>
+          </div>
+        </div>
+        <div class="marquee-track">
+          <div class="marquee-row marquee-row--rtl">
+            <span class="marquee-item">Claude API</span>
+            <span class="marquee-item">LangChain</span>
+            <span class="marquee-item">LangGraph</span>
+            <span class="marquee-item">Milvus</span>
+            <span class="marquee-item">LangSmith</span>
+            <span class="marquee-item">RAG</span>
+            <span class="marquee-item">HuggingFace</span>
+            <span class="marquee-item">Whisper</span>
+            <span class="marquee-item">PyTorch</span>
+            <span class="marquee-item">XGBoost</span>
+            <span class="marquee-item">scikit-learn</span>
+          </div>
+        </div>
+        <div class="marquee-track">
+          <div class="marquee-row marquee-row--ltr marquee-row--slow">
+            <span class="marquee-item">Django</span>
+            <span class="marquee-item">Streamlit</span>
+            <span class="marquee-item">Power BI</span>
+            <span class="marquee-item">Tableau</span>
+            <span class="marquee-item">Apps Script</span>
+            <span class="marquee-item">Notion API</span>
+            <span class="marquee-item">Amazon SP-API</span>
+            <span class="marquee-item">Shopify API</span>
+            <span class="marquee-item">Airflow</span>
+            <span class="marquee-item">dbt</span>
+            <span class="marquee-item">pandas</span>
+            <span class="marquee-item">Pydantic</span>
+            <span class="marquee-item">FastAPI</span>
+            <span class="marquee-item">React</span>
+            <span class="marquee-item">Electron</span>
+            <span class="marquee-item">TypeScript</span>
+          </div>
+        </div>
       </div>
     </section>
 
