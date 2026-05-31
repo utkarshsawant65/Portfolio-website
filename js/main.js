@@ -397,18 +397,18 @@
   /* ---------- 7. project filter chips ---------- */
   const initFilters = () => {
     const chips = document.querySelectorAll('.chip-filter');
-    const projects = document.querySelectorAll('.project[data-tags]');
-    if (!chips.length || !projects.length) return;
+    const slots = document.querySelectorAll('.project-slot[data-tags]');
+    if (!chips.length || !slots.length) return;
 
     chips.forEach((chip) => {
       chip.addEventListener('click', () => {
         chips.forEach((c) => c.classList.remove('is-active'));
         chip.classList.add('is-active');
         const filter = chip.dataset.filter;
-        projects.forEach((p) => {
-          const tags = (p.dataset.tags || '').split(' ');
+        slots.forEach((s) => {
+          const tags = (s.dataset.tags || '').split(' ');
           const show = filter === 'all' || tags.includes(filter);
-          p.classList.toggle('is-hidden', !show);
+          s.classList.toggle('is-hidden', !show);
         });
       });
     });
