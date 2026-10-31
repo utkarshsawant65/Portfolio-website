@@ -1,0 +1,45 @@
+/* =========================================================
+   tokens.css: colours, type scale, spacing, motion timing
+   ========================================================= */
+
+:root {
+  /* surface */
+  --bg: #0b0b10;
+  --surface: #13131b;
+  --surface-2: #1a1a26;
+  --border: #24242f;
+  --border-strong: #3a3a4c;
+
+  /* text (muted checked >= 4.5:1 on --bg and --surface) */
+  --text: #ececf1;
+  --text-muted: #a1a1b3;
+  --text-faint: #8d8da2;
+
+  /* brand */
+  --accent: #7c5cff;        /* fills, borders, glows */
+  --accent-text: #a897ff;   /* accent used as text (AA on --bg) */
+  --accent-2: #22d3ee;
+  --accent-3: #ff5cb0;
+  --good: #4ade80;
+
+  /* shape + spacing */
+  --radius: 16px;
+  --space: 8px;
+  --shell-w: min(1200px, 92vw);
+  --measure: 68ch;
+
+  /* type */
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Space Grotesk", "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+  --fs-h1: clamp(2.5rem, 6vw, 5rem);
+  --fs-h2: clamp(2rem, 4vw, 3rem);
+  --fs-body: 1.0625rem;
+  --lh-body: 1.65;
+
+  /* motion */
+  --t-fast: 150ms;
+  --t-base: 220ms;
+  --t-slow: 400ms;
+  --ease: cubic-bezier(.2, .8, .2, 1);
+}

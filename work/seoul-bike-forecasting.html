@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Seoul bike forecasting — Utkarsh Sawant</title>
+  <meta name="description" content="M.Sc. thesis comparing seven deep architectures for hourly demand forecasting, reaching 88.83% R² and correcting a data-leakage flaw in a published benchmark." />
+  <script>document.documentElement.classList.add('js');</script>
+  <link rel="canonical" href="https://utkarshsawant65.github.io/Portfolio-website/work/seoul-bike-forecasting.html" />
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Seoul bike forecasting — Utkarsh Sawant" />
+  <meta property="og:description" content="M.Sc. thesis comparing seven deep architectures for hourly demand forecasting, reaching 88.83% R² and correcting a data-leakage flaw in a published benchmark." />
+  <meta property="og:url" content="https://utkarshsawant65.github.io/Portfolio-website/work/seoul-bike-forecasting.html" />
+  <meta property="og:image" content="https://utkarshsawant65.github.io/Portfolio-website/assets/og/og-seoul.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="627" />
+  <meta property="og:image:alt" content="Seoul bike forecasting — Utkarsh Sawant" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/tokens.css" />
+  <link rel="stylesheet" href="../assets/css/base.css" />
+  <link rel="stylesheet" href="../assets/css/components.css" />
+  <link rel="stylesheet" href="../assets/css/motion.css" />
+</head>
+<body>
+  <a class="skip" href="#content">Skip to content</a>
+  <div class="progress" aria-hidden="true"></div>
+  <header class="site-header">
+    <a href="../index.html" class="brand" aria-label="Utkarsh Sawant, home">
+      <span class="brand-dot" aria-hidden="true"></span>
+      <span class="brand-text">utkarsh<span class="brand-accent">.sawant</span></span>
+    </a>
+    <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="primary-nav">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="primary-nav" id="primary-nav" aria-label="Primary">
+      <ul><li><a href="../index.html#work">work</a></li><li><a href="../index.html#platform">platform</a></li><li><a href="../index.html#experience">experience</a></li><li><a href="../index.html#contact">contact</a></li></ul>
+    </nav>
+  </header>
+
+  <main class="cs" id="content">
+    <a class="cs-back" href="../index.html#work">← back to work</a>
+
+    <p class="cs-kicker"><span class="badge badge--research">research · repo</span> seoul bike forecasting</p>
+    <h1 class="cs-title" style="view-transition-name: title-seoul">Forecasting hourly bike demand, and catching a leaked benchmark</h1>
+    <p class="cs-lede">M.Sc. thesis comparing seven deep architectures for hourly demand forecasting, reaching 88.83% R² and correcting a data-leakage flaw in a published benchmark.</p>
+
+    <dl class="cs-meta">
+      <dt>Role</dt><dd>author (M.Sc. thesis) · Timeline: 2026 · Team: 1</dd>
+      <dt>Stack</dt><dd>PyTorch · TensorFlow · XGBoost · scikit-learn · pandas</dd>
+      <dt>Code</dt><dd>research code on <a href="https://github.com/utkarshsawant65" target="_blank" rel="noopener">GitHub</a></dd>
+    </dl>
+
+    <section><h2><span class="n">01</span>Problem</h2><p>Bike-sharing systems need hourly demand forecasts to place bikes where riders will be. The Seoul bike-sharing dataset has a published CUBIST benchmark that other work compares against.</p><p>The thesis question was which deep architecture forecasts hourly demand best, and whether the benchmark itself holds up.</p></section>
+    <section><h2><span class="n">02</span>Constraints</h2><ul class="points"><li>Seven architectures compared under identical preprocessing and splits.</li><li>Time-series data: any leakage between train and test inflates the result.</li><li>Results must be reproducible by someone else.</li></ul></section>
+    <section><h2><span class="n">03</span>Architecture</h2>
+      <figure class="diagram"><svg class="fl" viewBox="0 0 640 68" role="img" xmlns="http://www.w3.org/2000/svg"><title>Forecasting experiment pipeline</title><desc>Hourly data is turned into features and split without look-ahead, seven architectures are trained, and each is evaluated by R².</desc><g class="k-src"><rect x="8.0" y="8.0" width="129.0" height="52" rx="6"/><text x="72.5" y="32.0" text-anchor="middle" font-size="12" font-weight="600">hourly data</text><text class="s" x="72.5" y="47.0" text-anchor="middle" font-size="10">weather · calendar</text></g><g class="k-proc"><rect x="173.0" y="8.0" width="129.0" height="52" rx="6"/><text x="237.5" y="32.0" text-anchor="middle" font-size="12" font-weight="600">features + split</text><text class="s" x="237.5" y="47.0" text-anchor="middle" font-size="10">no look-ahead</text></g><g class="k-proc"><rect x="338.0" y="8.0" width="129.0" height="52" rx="6"/><text x="402.5" y="32.0" text-anchor="middle" font-size="12" font-weight="600">7 architectures</text><text class="s" x="402.5" y="47.0" text-anchor="middle" font-size="10">LSTM · TCN · attention</text></g><g class="k-out"><rect x="503.0" y="8.0" width="129.0" height="52" rx="6"/><text x="567.5" y="32.0" text-anchor="middle" font-size="12" font-weight="600">evaluation</text><text class="s" x="567.5" y="47.0" text-anchor="middle" font-size="10">R² per model</text></g><path class="a" d="M 137.0 34.0 L 168.0 34.0"/><polygon points="173.0,34.0 167.0,30.5 167.0,37.5"/><path class="a" d="M 302.0 34.0 L 333.0 34.0"/><polygon points="338.0,34.0 332.0,30.5 332.0,37.5"/><path class="a" d="M 467.0 34.0 L 498.0 34.0"/><polygon points="503.0,34.0 497.0,30.5 497.0,37.5"/></svg><figcaption>// one preprocessing path, seven models, one metric</figcaption></figure>
+    </section>
+    <section><h2><span class="n">04</span>Key decisions</h2><ul class="points"><li><strong>One preprocessing path for all models,</strong> so differences in R² come from the architecture and not from data handling.</li><li><strong>Audit the benchmark before beating it.</strong> Reproducing the published pipeline exposed a data-leakage flaw that had inflated its reported results; the comparison uses the corrected version.</li><li><strong>Multi-scale hybrid over a single architecture.</strong> TCN layers capture patterns at several time scales and the LSTM carries sequence state; the hybrid was the best performer.</li></ul></section>
+    <section><h2><span class="n">05</span>Data model <span class="muted" style="font-size:.9rem;font-weight:400">· Experiment layout</span></h2>
+      <pre><code>target   hourly bike rentals
+models   LSTM · TCN · TCN-LSTM · attention variants (7 total)
+metric   R²
+best     Multi-Scale TCN+LSTM = 88.83%</code></pre>
+    </section>
+    <section><h2><span class="n">06</span>Results</h2>
+      <div class="results"><div class="result"><strong>88.83%</strong><span>R², Multi-Scale TCN+LSTM</span></div><div class="result"><strong>7</strong><span>architectures compared</span></div><div class="result"><strong>1</strong><span>leakage flaw found in a published benchmark</span></div></div>
+      <p>This is a research finding as well as a model result: the corrected benchmark is the fair baseline.</p>
+    </section>
+    <section><h2><span class="n">07</span>What I'd do next</h2><ul class="points"><li>Probabilistic forecasts (prediction intervals), because operators plan around uncertainty and not a point estimate.</li><li>Test transfer to another city's bike-sharing data to see whether the multi-scale design generalises.</li></ul></section>
+    <section><h2><span class="n">08</span>Links</h2><div class="cs-links"><a class="btn btn-ghost" href="https://github.com/utkarshsawant65" target="_blank" rel="noopener">GitHub ↗</a></div></section>
+
+    <nav class="cs-next" aria-label="Case studies">
+      <a class="btn btn-ghost" href="../index.html#work">← all work</a>
+      <a class="btn btn-primary" href="speech2insight.html">next: speech2insight →</a>
+    </nav>
+  </main>
+
+  <footer class="site-footer">
+    <span>© 2026 utkarsh sawant <span class="muted">// built with html, css, js &amp; coffee</span></span>
+    <span>v2 · local build</span>
+  </footer>
+
+  <script src="../assets/js/nav.js"></script>
+</body>
+</html>

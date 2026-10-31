@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://utkarshsawant65.github.io/Portfolio-website/sitemap.xml
