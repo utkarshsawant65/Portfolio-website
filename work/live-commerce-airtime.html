@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Live Commerce Airtime Intelligence — Utkarsh Sawant</title>
+  <meta name="description" content="A governed dbt + Snowflake + Power BI data product that attributes orders to broadcast airtime and measures live-commerce performance." />
+  <script>document.documentElement.classList.add('js');</script>
+  <link rel="canonical" href="https://utkarshsawant65.github.io/Portfolio-website/work/live-commerce-airtime.html" />
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Live Commerce Airtime Intelligence — Utkarsh Sawant" />
+  <meta property="og:description" content="A governed dbt + Snowflake + Power BI data product that attributes orders to broadcast airtime and measures live-commerce performance." />
+  <meta property="og:url" content="https://utkarshsawant65.github.io/Portfolio-website/work/live-commerce-airtime.html" />
+  <meta property="og:image" content="https://utkarshsawant65.github.io/Portfolio-website/assets/og/og-airtime.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="627" />
+  <meta property="og:image:alt" content="Live Commerce Airtime Intelligence — Utkarsh Sawant" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/tokens.css" />
+  <link rel="stylesheet" href="../assets/css/base.css" />
+  <link rel="stylesheet" href="../assets/css/components.css" />
+  <link rel="stylesheet" href="../assets/css/motion.css" />
+</head>
+<body>
+  <a class="skip" href="#content">Skip to content</a>
+  <div class="progress" aria-hidden="true"></div>
+  <header class="site-header">
+    <a href="../index.html" class="brand" aria-label="Utkarsh Sawant, home">
+      <span class="brand-dot" aria-hidden="true"></span>
+      <span class="brand-text">utkarsh<span class="brand-accent">.sawant</span></span>
+    </a>
+    <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="primary-nav">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="primary-nav" id="primary-nav" aria-label="Primary">
+      <ul><li><a href="../index.html#work">work</a></li><li><a href="../index.html#platform">platform</a></li><li><a href="../index.html#experience">experience</a></li><li><a href="../index.html#contact">contact</a></li></ul>
+    </nav>
+  </header>
+
+  <main class="cs" id="content">
+    <a class="cs-back" href="../index.html#work">← back to work</a>
+
+    <p class="cs-kicker"><span class="badge badge--public">public repo</span> live commerce airtime intelligence</p>
+    <h1 class="cs-title" style="view-transition-name: title-airtime">Tying every order to the broadcast minute that drove it</h1>
+    <p class="cs-lede">A governed dbt + Snowflake + Power BI data product that attributes orders to broadcast airtime and measures live-commerce performance.</p>
+
+    <dl class="cs-meta">
+      <dt>Role</dt><dd>sole author · Timeline: 2026 · Team: 1</dd>
+      <dt>Stack</dt><dd>Snowflake · dbt · Python · Power BI · GitHub Actions</dd>
+      <dt>Code</dt><dd>public repo: <a href="https://github.com/utkarshsawant65/Live-commerce-airtime-intelligence" target="_blank" rel="noopener">github.com/utkarshsawant65/Live-commerce-airtime-intelligence</a></dd>
+    </dl>
+
+    <section><h2><span class="n">01</span>Problem</h2><p>Live-commerce retailers sell through broadcast, backed by an online shop and an app. A presenter shows a product in a time window and orders spike across every channel at once. The business question is which product, presenter and time slot earns the most per minute of air.</p><p>Standard retail models cannot answer it, because nothing ties an order to the segment that caused it. This project models that mechanic end to end and measures revenue per broadcast minute, conversion lift and return-rate intelligence.</p></section>
+    <section><h2><span class="n">02</span>Constraints</h2><ul class="points"><li>No public dataset carries a broadcast or airtime dimension, so the data is synthetic by design. Generating it means the airtime-to-sales correlation is known and the attribution logic can be checked against ground truth.</li><li>Runnable offline before a Snowflake account exists.</li><li>BI reads from <code>MARTS</code> only. No dashboard or ad-hoc query touches staging or raw.</li><li>Every KPI is defined once, in one catalog.</li></ul></section>
+    <section><h2><span class="n">03</span>Architecture</h2>
+      <figure class="diagram"><svg class="fl" viewBox="0 0 640 164" role="img" xmlns="http://www.w3.org/2000/svg"><title>Live commerce airtime architecture</title><desc>A Python generator lands data in Snowflake RAW, dbt moves it through staging and an attribution layer into marts, and Power BI reads marts only.</desc><g class="k-src"><rect x="8.0" y="8.0" width="184.0" height="52" rx="6"/><text x="100.0" y="32.0" text-anchor="middle" font-size="12" font-weight="600">python generator</text><text class="s" x="100.0" y="47.0" text-anchor="middle" font-size="10">orders · airtime · returns</text></g><g class="k-store"><rect x="228.0" y="8.0" width="184.0" height="52" rx="6"/><text x="320.0" y="32.0" text-anchor="middle" font-size="12" font-weight="600">RAW</text><text class="s" x="320.0" y="47.0" text-anchor="middle" font-size="10">snowflake, as landed</text></g><g class="k-proc"><rect x="448.0" y="8.0" width="184.0" height="52" rx="6"/><text x="540.0" y="32.0" text-anchor="middle" font-size="12" font-weight="600">STAGING</text><text class="s" x="540.0" y="47.0" text-anchor="middle" font-size="10">1:1 clean</text></g><g class="k-proc"><rect x="8.0" y="104.0" width="184.0" height="52" rx="6"/><text x="100.0" y="128.0" text-anchor="middle" font-size="12" font-weight="600">INTERMEDIATE</text><text class="s" x="100.0" y="143.0" text-anchor="middle" font-size="10">airtime attribution</text></g><g class="k-store"><rect x="228.0" y="104.0" width="184.0" height="52" rx="6"/><text x="320.0" y="128.0" text-anchor="middle" font-size="12" font-weight="600">MARTS</text><text class="s" x="320.0" y="143.0" text-anchor="middle" font-size="10">star schema + metrics</text></g><g class="k-out"><rect x="448.0" y="104.0" width="184.0" height="52" rx="6"/><text x="540.0" y="128.0" text-anchor="middle" font-size="12" font-weight="600">Power BI</text><text class="s" x="540.0" y="143.0" text-anchor="middle" font-size="10">semantic model + RLS</text></g><path class="a" d="M 192.0 34.0 L 223.0 34.0"/><polygon points="228.0,34.0 222.0,30.5 222.0,37.5"/><path class="a" d="M 412.0 34.0 L 443.0 34.0"/><polygon points="448.0,34.0 442.0,30.5 442.0,37.5"/><path class="a" d="M 540.0 60.0 L 540.0 82.0 L 100.0 82.0 L 100.0 99.0"/><polygon points="100.0,104.0 96.5,98.0 103.5,98.0"/><path class="a" d="M 192.0 130.0 L 223.0 130.0"/><polygon points="228.0,130.0 222.0,126.5 222.0,133.5"/><path class="a" d="M 412.0 130.0 L 443.0 130.0"/><polygon points="448.0,130.0 442.0,126.5 442.0,133.5"/></svg><figcaption>// raw → staging → intermediate → marts → BI</figcaption></figure>
+    </section>
+    <section><h2><span class="n">04</span>Key decisions</h2><ul class="points"><li><strong>Micro-batch ingestion, not Kafka.</strong> This is an analytical workload with minutes-fresh KPIs, not sub-second events. A streaming bus would be a second distributed system to run for no analytical gain. Streams + Dynamic Tables are built as the upgrade path.</li><li><strong>Land the semi-structured feed as VARIANT.</strong> Schema-on-read decouples ingestion from schema, so a source adding or renaming a field never breaks the load.</li><li><strong>Quarantine bad rows instead of dropping them.</strong> Invalid rows go to a quarantine model with a failure reason, which makes data quality observable and backfillable.</li></ul></section>
+    <section><h2><span class="n">05</span>Data model <span class="muted" style="font-size:.9rem;font-weight:400">· Star schema and attribution</span></h2>
+      <pre><code>dims   dim_date · dim_time_minute · dim_product (SCD2)
+       dim_presenter · dim_channel · dim_show
+facts  fact_order_line (incremental) · fact_airtime_segment
+       fact_returns · fact_traffic
+attr   int_orders_attributed_to_airtime
+       order_time in [start, end + lag], last-touch tie-break,
+       unmatched orders -&gt; segment -1 (organic)</code></pre>
+    </section>
+    <section><h2><span class="n">06</span>Results</h2>
+      <div class="results"><div class="result"><strong>6</strong><span>conformed dimensions</span></div><div class="result"><strong>4</strong><span>fact tables</span></div><div class="result"><strong>1</strong><span>definition per KPI</span></div><div class="result"><strong>every PR</strong><span>dbt build, test, lint in CI</span></div></div>
+      <p>SCD2 product history gives point-in-time accuracy, and Power BI row-level security sits on the governed metrics mart.</p>
+    </section>
+    <section><h2><span class="n">07</span>What I'd do next</h2><ul class="points"><li>Point the attribution layer at a real broadcast schedule instead of generated segments.</li><li>Promote the built Streams + Dynamic Tables path to the default if freshness requirements drop below a few minutes.</li></ul></section>
+    <section><h2><span class="n">08</span>Links</h2><div class="cs-links"><a class="btn btn-primary" href="https://github.com/utkarshsawant65/Live-commerce-airtime-intelligence" target="_blank" rel="noopener">View the repo ↗</a></div></section>
+
+    <nav class="cs-next" aria-label="Case studies">
+      <a class="btn btn-ghost" href="../index.html#work">← all work</a>
+      <a class="btn btn-primary" href="kpi-platform.html">next: kpi platform →</a>
+    </nav>
+  </main>
+
+  <footer class="site-footer">
+    <span>© 2026 utkarsh sawant <span class="muted">// built with html, css, js &amp; coffee</span></span>
+    <span>v2 · local build</span>
+  </footer>
+
+  <script src="../assets/js/nav.js"></script>
+</body>
+</html>

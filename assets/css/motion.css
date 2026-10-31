@@ -1,0 +1,87 @@
+/* =========================================================
+   motion.css: all animation + reduced-motion rules
+   Rule: every animation shows data moving or content arriving.
+   ========================================================= */
+
+/* ---------- 4.1 cross-document view transitions ---------- */
+/* both index.html and /work/*.html load this file, so both opt in */
+@view-transition { navigation: auto; }
+
+.card[data-slug="invoice"]         .card-title { view-transition-name: title-invoice; }
+.card[data-slug="airtime"]         .card-title { view-transition-name: title-airtime; }
+.card[data-slug="kpi"]             .card-title { view-transition-name: title-kpi; }
+.card[data-slug="pnl"]             .card-title { view-transition-name: title-pnl; }
+.card[data-slug="seoul"]           .card-title { view-transition-name: title-seoul; }
+.card[data-slug="speech2insight"]  .card-title { view-transition-name: title-speech2insight; }
+/* case-study pages set the matching name inline on .cs-title */
+
+::view-transition-old(root),
+::view-transition-new(root) { animation-duration: 280ms; }
+
+/* ---------- 3.1 hero DAG: data flowing + nodes lighting in sequence ---------- */
+.edge { stroke-dasharray: 6 10; animation: flow 1.2s linear infinite; }
+@keyframes flow { to { stroke-dashoffset: -16; } }
+
+.node { animation: pulse 4s ease-in-out infinite; }
+.node:nth-of-type(2) { animation-delay: .6s; }
+.node:nth-of-type(3) { animation-delay: 1.2s; }
+.node:nth-of-type(4) { animation-delay: 1.8s; }
+.node:nth-of-type(5) { animation-delay: 2.4s; }
+@keyframes pulse {
+  0%, 70%, 100% { opacity: .55; }
+  20% { opacity: 1; filter: drop-shadow(0 0 8px var(--accent)); }
+}
+
+/* platform rail reuses the same flow motion */
+.pipeline::before { animation: rail 1.2s linear infinite; }
+@keyframes rail { to { background-position: 0 16px; } }
+
+/* ---------- 4.2 scroll-driven reveals (visible by default) ---------- */
+.reveal { opacity: 1; }
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      animation: reveal linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 30%;
+    }
+    .timeline::before {
+      transform-origin: top;
+      animation: grow linear both;
+      animation-timeline: view();
+      animation-range: entry 10% cover 60%;
+    }
+  }
+}
+@keyframes reveal { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+@keyframes grow { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+
+/* reading progress bar (case-study pages only) */
+.progress {
+  position: fixed; inset: 0 0 auto 0; z-index: 200; height: 2px;
+  background: var(--accent); transform-origin: left; transform: scaleX(0);
+}
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .progress { animation: grow-x linear both; animation-timeline: scroll(root); }
+  }
+}
+@keyframes grow-x { to { transform: scaleX(1); } }
+
+/* ---------- 4.3 micro-interactions ---------- */
+.status-dot { animation: blink 2s ease-in-out infinite; }
+@keyframes blink { 50% { opacity: .45; } }
+
+/* ---------- reduced motion: everything off ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation: none !important;
+    transition-duration: .01ms !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+  .node { opacity: 1; }
+  .progress { display: none; }
+  ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
+}

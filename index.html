@@ -3,848 +3,338 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Utkarsh Sawant · Data Engineer</title>
-  <meta name="description" content="Utkarsh Sawant. Data engineer building cloud-native pipelines, LLM-integrated automation, and ML systems. Based in Germany." />
+  <title>Utkarsh Sawant — Data Engineer (Data + AI)</title>
+  <meta name="description" content="Pipelines, warehouses and LLM automation that small teams trust. Based in Germany." />
+  <script>document.documentElement.classList.add('js');</script>
+  <link rel="canonical" href="https://utkarshsawant65.github.io/Portfolio-website/" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Utkarsh Sawant — Data Engineer (Data + AI)" />
+  <meta property="og:description" content="Pipelines, warehouses and LLM automation that small teams trust. Based in Germany." />
+  <meta property="og:url" content="https://utkarshsawant65.github.io/Portfolio-website/" />
+  <meta property="og:image" content="https://utkarshsawant65.github.io/Portfolio-website/assets/og/og-home.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="627" />
+  <meta property="og:image:alt" content="Utkarsh Sawant — Data Engineer (Data + AI)" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Utkarsh Sawant",
+    "jobTitle": "Data Engineer",
+    "url": "https://utkarshsawant65.github.io/Portfolio-website/",
+    "address": {"@type": "PostalAddress", "addressCountry": "DE"},
+    "sameAs": ["https://www.linkedin.com/in/utkarsh-sawant/", "https://github.com/utkarshsawant65"],
+    "knowsAbout": ["Data Engineering", "dbt", "Airflow", "PostgreSQL", "Snowflake", "GCP", "LLM automation"]
+  }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/tokens.css" />
+  <link rel="stylesheet" href="assets/css/base.css" />
+  <link rel="stylesheet" href="assets/css/components.css" />
+  <link rel="stylesheet" href="assets/css/motion.css" />
 </head>
-<body data-bg="particles">
-  <canvas id="bg-canvas" class="bg-layer bg-particles" aria-hidden="true"></canvas>
-  <div class="grid-overlay bg-layer bg-particles" aria-hidden="true"></div>
-
-  <!-- v2: live KPI ticker (realistic metrics + timestamps streaming) -->
-  <div class="bg-layer bg-kpi" aria-hidden="true">
-    <pre class="kpi-stream"></pre>
-    <pre class="kpi-stream kpi-stream--b"></pre>
-  </div>
-
-  <!-- v2: labeled real-pipeline DAG -->
-  <div class="bg-layer bg-dag2" aria-hidden="true">
-    <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" width="100%" height="100%">
-      <g class="dag2-edges" stroke="rgba(124,92,255,0.28)" stroke-width="1.2" fill="none">
-        <path id="e1" d="M 240,160 C 380,160 420,300 560,300"/>
-        <path id="e2" d="M 240,320 C 380,320 420,300 560,300"/>
-        <path id="e3" d="M 240,480 C 380,480 420,460 560,460"/>
-        <path id="e4" d="M 240,640 C 380,640 420,640 560,640"/>
-        <path id="e5" d="M 720,300 C 860,300 900,380 1040,380"/>
-        <path id="e6" d="M 720,460 C 860,460 900,460 1040,460"/>
-        <path id="e7" d="M 720,640 C 860,640 900,540 1040,540"/>
-        <path id="e8" d="M 1200,380 C 1320,380 1340,460 1460,460"/>
-        <path id="e9" d="M 1200,460 C 1320,460 1340,460 1460,460"/>
-        <path id="e10" d="M 1200,540 C 1320,540 1340,460 1460,460"/>
-      </g>
-      <g class="dag2-nodes" font-family="JetBrains Mono, monospace" font-size="13">
-        <g transform="translate(140,140)"><rect width="200" height="40" rx="6" fill="rgba(15,15,23,0.85)" stroke="rgba(0,225,255,0.5)"/><text x="100" y="25" text-anchor="middle" fill="#a8a8b8">SP-API · orders</text></g>
-        <g transform="translate(140,300)"><rect width="200" height="40" rx="6" fill="rgba(15,15,23,0.85)" stroke="rgba(0,225,255,0.5)"/><text x="100" y="25" text-anchor="middle" fill="#a8a8b8">Shopify · DTC</text></g>
-        <g transform="translate(140,460)"><rect width="200" height="40" rx="6" fill="rgba(15,15,23,0.85)" stroke="rgba(0,225,255,0.5)"/><text x="100" y="25" text-anchor="middle" fill="#a8a8b8">Sheets · finance</text></g>
-        <g transform="translate(140,620)"><rect width="200" height="40" rx="6" fill="rgba(15,15,23,0.85)" stroke="rgba(0,225,255,0.5)"/><text x="100" y="25" text-anchor="middle" fill="#a8a8b8">Notion · KPI defs</text></g>
-        <g transform="translate(560,280)"><rect width="160" height="40" rx="6" fill="rgba(15,15,23,0.85)" stroke="rgba(124,92,255,0.5)"/><text x="80" y="25" text-anchor="middle" fill="#a8a8b8">stg_orders</text></g>
-        <g transform="translate(560,440)"><rect width="160" height="40" rx="6" fill="rgba(15,15,23,0.85)" stroke="rgba(124,92,255,0.5)"/><text x="80" y="25" text-anchor="middle" fill="#a8a8b8">stg_txns</text></g>
-        <g transform="translate(560,620)"><rect width="160" height="40" rx="6" fill="rgba(15,15,23,0.85)" stroke="rgba(124,92,255,0.5)"/><text x="80" y="25" text-anchor="middle" fill="#a8a8b8">stg_kpi</text></g>
-        <g transform="translate(1040,360)"><rect width="160" height="40" rx="6" fill="rgba(15,15,23,0.85)" stroke="rgba(255,92,176,0.5)"/><text x="80" y="25" text-anchor="middle" fill="#a8a8b8">fct_orders</text></g>
-        <g transform="translate(1040,440)"><rect width="160" height="40" rx="6" fill="rgba(15,15,23,0.85)" stroke="rgba(255,92,176,0.5)"/><text x="80" y="25" text-anchor="middle" fill="#a8a8b8">fct_pnl</text></g>
-        <g transform="translate(1040,520)"><rect width="160" height="40" rx="6" fill="rgba(15,15,23,0.85)" stroke="rgba(255,92,176,0.5)"/><text x="80" y="25" text-anchor="middle" fill="#a8a8b8">mart_kpi</text></g>
-        <g transform="translate(1380,440)"><rect width="160" height="40" rx="6" fill="rgba(15,15,23,0.85)" stroke="rgba(0,225,255,0.7)"/><text x="80" y="25" text-anchor="middle" fill="#e8e8ee">dashboard</text></g>
-      </g>
-      <g class="dag2-pulses" fill="#00e1ff">
-        <circle r="3"><animateMotion dur="6s" repeatCount="indefinite"><mpath href="#e1"/></animateMotion></circle>
-        <circle r="3"><animateMotion dur="7s" begin="1s" repeatCount="indefinite"><mpath href="#e3"/></animateMotion></circle>
-        <circle r="3"><animateMotion dur="6.5s" begin="2.5s" repeatCount="indefinite"><mpath href="#e5"/></animateMotion></circle>
-        <circle r="3"><animateMotion dur="6s" begin="3.5s" repeatCount="indefinite"><mpath href="#e6"/></animateMotion></circle>
-        <circle r="3"><animateMotion dur="5.5s" begin="4.5s" repeatCount="indefinite"><mpath href="#e9"/></animateMotion></circle>
-      </g>
-    </svg>
-  </div>
-
-  <!-- v2: typing terminal prompt -->
-  <div class="bg-layer bg-prompt" aria-hidden="true">
-    <pre class="prompt-window">
-<span class="prompt-header mono">noritual@prod-warehouse · psql 15.4</span>
-<span class="prompt-line mono"><span class="prompt-ps">noritual=&gt;</span> <span class="prompt-typed"></span><span class="prompt-cursor">_</span></span>
-    </pre>
-  </div>
-
-  <!-- v2: ER diagram ghost -->
-  <div class="bg-layer bg-erd" aria-hidden="true">
-    <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" width="100%" height="100%" font-family="JetBrains Mono, monospace" font-size="12">
-      <g stroke="rgba(124,92,255,0.22)" stroke-width="1" fill="none">
-        <path d="M 320,260 C 460,260 520,420 660,420"/>
-        <path d="M 320,540 C 460,540 520,460 660,460"/>
-        <path d="M 980,420 C 1120,420 1180,260 1320,260"/>
-        <path d="M 980,460 C 1120,460 1180,540 1320,540"/>
-      </g>
-      <g class="erd-tables">
-        <g transform="translate(160,200)">
-          <rect width="260" height="180" rx="4" fill="rgba(15,15,23,0.7)" stroke="rgba(0,225,255,0.35)"/>
-          <text x="14" y="26" fill="#00e1ff">fct_orders</text>
-          <line x1="0" y1="38" x2="260" y2="38" stroke="rgba(0,225,255,0.25)"/>
-          <text x="14" y="60" fill="#a8a8b8">order_id      PK uuid</text>
-          <text x="14" y="80" fill="#a8a8b8">sku_id        FK uuid</text>
-          <text x="14" y="100" fill="#a8a8b8">channel       text</text>
-          <text x="14" y="120" fill="#a8a8b8">order_date    timestamp</text>
-          <text x="14" y="140" fill="#a8a8b8">revenue_eur   numeric</text>
-          <text x="14" y="160" fill="#a8a8b8">cogs_eur      numeric</text>
-        </g>
-        <g transform="translate(160,480)">
-          <rect width="260" height="160" rx="4" fill="rgba(15,15,23,0.7)" stroke="rgba(124,92,255,0.35)"/>
-          <text x="14" y="26" fill="#7c5cff">fct_invoices</text>
-          <line x1="0" y1="38" x2="260" y2="38" stroke="rgba(124,92,255,0.25)"/>
-          <text x="14" y="60" fill="#a8a8b8">invoice_id    PK uuid</text>
-          <text x="14" y="80" fill="#a8a8b8">txn_id        FK uuid</text>
-          <text x="14" y="100" fill="#a8a8b8">vendor_name   text</text>
-          <text x="14" y="120" fill="#a8a8b8">amount_eur    numeric</text>
-          <text x="14" y="140" fill="#a8a8b8">match_conf    numeric</text>
-        </g>
-        <g transform="translate(660,380)">
-          <rect width="320" height="160" rx="4" fill="rgba(15,15,23,0.7)" stroke="rgba(255,92,176,0.35)"/>
-          <text x="14" y="26" fill="#ff5cb0">mart_pnl_monthly</text>
-          <line x1="0" y1="38" x2="320" y2="38" stroke="rgba(255,92,176,0.25)"/>
-          <text x="14" y="60" fill="#a8a8b8">month         PK date</text>
-          <text x="14" y="80" fill="#a8a8b8">revenue_total numeric</text>
-          <text x="14" y="100" fill="#a8a8b8">cogs_total    numeric</text>
-          <text x="14" y="120" fill="#a8a8b8">opex_total    numeric</text>
-          <text x="14" y="140" fill="#a8a8b8">net_margin    numeric</text>
-        </g>
-        <g transform="translate(1320,200)">
-          <rect width="220" height="140" rx="4" fill="rgba(15,15,23,0.7)" stroke="rgba(0,225,255,0.35)"/>
-          <text x="14" y="26" fill="#00e1ff">dim_sku</text>
-          <line x1="0" y1="38" x2="220" y2="38" stroke="rgba(0,225,255,0.25)"/>
-          <text x="14" y="60" fill="#a8a8b8">sku_id    PK uuid</text>
-          <text x="14" y="80" fill="#a8a8b8">sku_name  text</text>
-          <text x="14" y="100" fill="#a8a8b8">category  text</text>
-          <text x="14" y="120" fill="#a8a8b8">launched  date</text>
-        </g>
-        <g transform="translate(1320,480)">
-          <rect width="220" height="140" rx="4" fill="rgba(15,15,23,0.7)" stroke="rgba(0,225,255,0.35)"/>
-          <text x="14" y="26" fill="#00e1ff">dim_channel</text>
-          <line x1="0" y1="38" x2="220" y2="38" stroke="rgba(0,225,255,0.25)"/>
-          <text x="14" y="60" fill="#a8a8b8">channel_id  PK</text>
-          <text x="14" y="80" fill="#a8a8b8">name        text</text>
-          <text x="14" y="100" fill="#a8a8b8">fee_pct     numeric</text>
-          <text x="14" y="120" fill="#a8a8b8">currency    text</text>
-        </g>
-      </g>
-    </svg>
-  </div>
-
-  <div class="cursor-glow" aria-hidden="true"></div>
-
+<body>
+  <a class="skip" href="#work">Skip to work</a>
   <header class="site-header">
-    <a href="#home" class="brand">
-      <span class="brand-dot"></span>
+    <a href="#home" class="brand" aria-label="Utkarsh Sawant, home">
+      <span class="brand-dot" aria-hidden="true"></span>
       <span class="brand-text">utkarsh<span class="brand-accent">.sawant</span></span>
     </a>
-    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+    <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="primary-nav">
       <span></span><span></span><span></span>
     </button>
-    <nav class="primary-nav" aria-label="Primary">
-      <ul>
-        <li><a href="#home" data-nav>home</a></li>
-        <li><a href="#about" data-nav>about</a></li>
-        <li><a href="#stack" data-nav>stack</a></li>
-        <li><a href="#thinking" data-nav>thinking</a></li>
-        <li><a href="#projects" data-nav>projects</a></li>
-        <li><a href="#experience" data-nav>experience</a></li>
-        <li><a href="#contact" data-nav>contact</a></li>
-      </ul>
+    <nav class="primary-nav" id="primary-nav" aria-label="Primary">
+      <ul><li><a href="#work" data-nav>work</a></li><li><a href="#platform" data-nav>platform</a></li><li><a href="#experience" data-nav>experience</a></li><li><a href="#contact" data-nav>contact</a></li></ul>
     </nav>
   </header>
 
   <main>
     <!-- HERO -->
     <section id="home" class="hero">
-      <div class="hero-meta" data-animate>
-        <span class="status-dot"></span>
-        <span class="mono">available_for_hire == true</span>
+      <div class="hero-grid">
+        <div>
+          <p class="status-pill"><span class="status-dot" aria-hidden="true"></span>available_for_hire == true</p>
+          <h1 class="hero-title">
+            <span class="hero-name">Utkarsh Sawant</span>
+            <span class="hero-tag"><span class="muted">&gt;</span> From <em>raw data</em><br />to <span class="grad">decisions.</span></span>
+          </h1>
+          <p class="hero-role">Data Engineer (Data + AI) · Mannheim</p>
+          <p class="hero-sub">I build pipelines, warehouses and LLM automation that small teams trust.</p>
+          <div class="hero-cta">
+            <a href="#work" class="btn btn-primary">see the work <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            <a href="https://www.linkedin.com/in/utkarsh-sawant/" class="btn btn-ghost" target="_blank" rel="noopener">LinkedIn ↗</a>
+            <a href="https://github.com/utkarshsawant65" class="btn btn-ghost" target="_blank" rel="noopener">GitHub ↗</a>
+          </div>
+        </div>
+        <div class="dag" aria-label="Pipeline motif">
+          <svg viewBox="0 0 540 316" role="img" xmlns="http://www.w3.org/2000/svg"><title>Pipeline: Shopify and Amazon SP-API into a GCS raw layer, then Postgres, dbt marts and Power BI</title><g class="edges"><path class="edge" d="M 69.0 60 V 93.0 H 108"/><path class="edge" d="M 169.0 116 V 149.0 H 208"/><path class="edge" d="M 269.0 172 V 205.0 H 308"/><path class="edge" d="M 369.0 228 V 261.0 H 408"/></g><g class="nodes"><g class="node n-src"><rect x="8" y="14" width="122" height="46" rx="7"/><text class="t1" x="69.0" y="34" text-anchor="middle">Shopify · SP-API</text><text class="t2" x="69.0" y="49" text-anchor="middle">source</text></g><g class="node n-mid"><rect x="108" y="70" width="122" height="46" rx="7"/><text class="t1" x="169.0" y="90" text-anchor="middle">GCS raw</text><text class="t2" x="169.0" y="105" text-anchor="middle">land</text></g><g class="node n-mid"><rect x="208" y="126" width="122" height="46" rx="7"/><text class="t1" x="269.0" y="146" text-anchor="middle">Postgres</text><text class="t2" x="269.0" y="161" text-anchor="middle">store</text></g><g class="node n-mid"><rect x="308" y="182" width="122" height="46" rx="7"/><text class="t1" x="369.0" y="202" text-anchor="middle">dbt marts</text><text class="t2" x="369.0" y="217" text-anchor="middle">transform</text></g><g class="node n-out"><rect x="408" y="238" width="122" height="46" rx="7"/><text class="t1" x="469.0" y="258" text-anchor="middle">Power BI</text><text class="t2" x="469.0" y="273" text-anchor="middle">serve</text></g></g></svg>
+          <p class="dag-cap">// raw → model → decision</p>
+        </div>
       </div>
-      <h1 class="hero-title">
-        <span class="line" data-animate><span class="muted">&gt;</span> From <em>raw data</em></span>
-        <span class="line" data-animate>to <span class="grad">decisions.</span></span>
-      </h1>
-      <p class="hero-sub" data-animate>
-        Data engineer based in Germany. I own the full data stack — ingest,
-        warehouse, pipelines, LLM automation, and BI — so small teams get
-        numbers they can actually trust.
-      </p>
-      <div class="hero-cta" data-animate>
-        <a href="#projects" class="btn btn-primary">
-          <span>see the work</span>
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </a>
+
+      <ul class="proof" aria-label="Proof in numbers">
+        <li class="proof-item"><strong data-count="1000" data-prefix="~">~1,000</strong><span>transactions / month,<br />LLM-classified</span></li>
+        <li class="proof-item"><strong data-count="48">48</strong><span>metrics under one<br />data contract</span></li>
+        <li class="proof-item"><strong>10–12</strong><span>active dashboard<br />users</span></li>
+        <li class="proof-item"><strong data-count="88.83" data-decimals="2" data-suffix="%">88.83%</strong><span>R² on the thesis<br />forecasting model</span></li>
+      </ul>
+    </section>
+
+    <!-- WORK -->
+    <section id="work">
+      <div class="shell">
+        <div class="section-head reveal">
+          <span class="section-num">01</span>
+          <h2>selected work<span class="dot">.</span></h2>
+          <p class="section-sub">six case studies. best work first, each one opens a full write-up.</p>
+        </div>
+        <div class="filters" role="group" aria-label="Filter projects">
+          <button class="filter" type="button" data-filter="all" aria-pressed="true">all</button>
+          <button class="filter" type="button" data-filter="pipelines" aria-pressed="false">pipelines</button>
+          <button class="filter" type="button" data-filter="llm" aria-pressed="false">llm</button>
+          <button class="filter" type="button" data-filter="ml" aria-pressed="false">ml</button>
+          <button class="filter" type="button" data-filter="bi" aria-pressed="false">bi</button>
+        </div>
+        <div class="bento">
+        <article class="card reveal card--xl" data-slug="invoice" data-tools="claude gcs cloud-scheduler python" data-tags="pipelines llm">
+          <div class="card-top">
+            <span class="card-num">01</span>
+            <span class="badge">production · private code</span>
+          </div>
+          <h3 class="card-title"><a class="card-main" href="work/invoice-automation.html">invoice automation</a></h3>
+          <p class="card-outcome">Matches ~1,000 transactions a month to invoice PDFs with confidence-scored LLM screening. Replaced accountant fees for transaction-to-invoice linking.</p>
+          <div class="card-thumb"><svg class="fl" viewBox="0 0 400 60" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><g class="k-src"><rect x="8.0" y="8.0" width="79.5" height="44" rx="6"/><text x="47.8" y="28.0" text-anchor="middle" font-size="10" font-weight="600">ledger</text><text class="s" x="47.8" y="43.0" text-anchor="middle" font-size="8">~1k / mo</text></g><g class="k-proc"><rect x="109.5" y="8.0" width="79.5" height="44" rx="6"/><text x="149.2" y="28.0" text-anchor="middle" font-size="10" font-weight="600">claude</text><text class="s" x="149.2" y="43.0" text-anchor="middle" font-size="8">needs invoice?</text></g><g class="k-proc"><rect x="211.0" y="8.0" width="79.5" height="44" rx="6"/><text x="250.8" y="28.0" text-anchor="middle" font-size="10" font-weight="600">match</text><text class="s" x="250.8" y="43.0" text-anchor="middle" font-size="8">+ confidence</text></g><g class="k-store"><rect x="312.5" y="8.0" width="79.5" height="44" rx="6"/><text x="352.2" y="28.0" text-anchor="middle" font-size="10" font-weight="600">accepted/</text><text class="s" x="352.2" y="43.0" text-anchor="middle" font-size="8">trash/</text></g><path class="a" d="M 87.5 30.0 L 104.5 30.0"/><polygon points="109.5,30.0 103.5,26.5 103.5,33.5"/><path class="a" d="M 189.0 30.0 L 206.0 30.0"/><polygon points="211.0,30.0 205.0,26.5 205.0,33.5"/><path class="a" d="M 290.5 30.0 L 307.5 30.0"/><polygon points="312.5,30.0 306.5,26.5 306.5,33.5"/></svg></div>
+          <p class="card-tools">GCP · GCS · Cloud Scheduler · Claude API · Python</p>
+          <div class="card-foot"><span class="card-cta" aria-hidden="true">read case study →</span></div>
+        </article>
+        <article class="card reveal card--wide" data-slug="airtime" data-tools="snowflake dbt powerbi python github-actions sql" data-tags="pipelines bi">
+          <div class="card-top">
+            <span class="card-num">02</span>
+            <span class="badge badge--public">public repo</span>
+          </div>
+          <h3 class="card-title"><a class="card-main" href="work/live-commerce-airtime.html">live commerce airtime intelligence</a></h3>
+          <p class="card-outcome">Ties every order to the broadcast minute that drove it: revenue per airtime minute, conversion lift and return-rate intelligence.</p>
+          <div class="card-thumb"><svg class="fl" viewBox="0 0 400 60" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><g class="k-src"><rect x="8.0" y="8.0" width="79.5" height="44" rx="6"/><text x="47.8" y="28.0" text-anchor="middle" font-size="10" font-weight="600">generator</text><text class="s" x="47.8" y="43.0" text-anchor="middle" font-size="8">python</text></g><g class="k-store"><rect x="109.5" y="8.0" width="79.5" height="44" rx="6"/><text x="149.2" y="28.0" text-anchor="middle" font-size="10" font-weight="600">raw</text><text class="s" x="149.2" y="43.0" text-anchor="middle" font-size="8">snowflake</text></g><g class="k-proc"><rect x="211.0" y="8.0" width="79.5" height="44" rx="6"/><text x="250.8" y="28.0" text-anchor="middle" font-size="10" font-weight="600">marts</text><text class="s" x="250.8" y="43.0" text-anchor="middle" font-size="8">dbt star</text></g><g class="k-out"><rect x="312.5" y="8.0" width="79.5" height="44" rx="6"/><text x="352.2" y="28.0" text-anchor="middle" font-size="10" font-weight="600">Power BI</text><text class="s" x="352.2" y="43.0" text-anchor="middle" font-size="8">RLS</text></g><path class="a" d="M 87.5 30.0 L 104.5 30.0"/><polygon points="109.5,30.0 103.5,26.5 103.5,33.5"/><path class="a" d="M 189.0 30.0 L 206.0 30.0"/><polygon points="211.0,30.0 205.0,26.5 205.0,33.5"/><path class="a" d="M 290.5 30.0 L 307.5 30.0"/><polygon points="312.5,30.0 306.5,26.5 306.5,33.5"/></svg></div>
+          <p class="card-tools">Snowflake · dbt · Power BI · GitHub Actions</p>
+          <div class="card-foot"><span class="card-cta" aria-hidden="true">read case study →</span><a class="card-repo" href="https://github.com/utkarshsawant65/Live-commerce-airtime-intelligence" target="_blank" rel="noopener" aria-label="live commerce airtime intelligence repository (opens GitHub)">repo ↗</a></div>
+        </article>
+        <article class="card reveal card--wide" data-slug="kpi" data-tools="django postgres powerbi notion python" data-tags="pipelines bi">
+          <div class="card-top">
+            <span class="card-num">03</span>
+            <span class="badge">production · private code</span>
+          </div>
+          <h3 class="card-title"><a class="card-main" href="work/kpi-platform.html">kpi platform</a></h3>
+          <p class="card-outcome">One source of truth for the founders&#x27; weekly review. Django app on a Postgres star schema, 10–12 active users.</p>
+          <div class="card-thumb"><svg class="fl" viewBox="0 0 400 60" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><g class="k-src"><rect x="8.0" y="8.0" width="79.5" height="44" rx="6"/><text x="47.8" y="28.0" text-anchor="middle" font-size="10" font-weight="600">notion·sheets</text><text class="s" x="47.8" y="43.0" text-anchor="middle" font-size="8">inputs</text></g><g class="k-store"><rect x="109.5" y="8.0" width="79.5" height="44" rx="6"/><text x="149.2" y="28.0" text-anchor="middle" font-size="10" font-weight="600">postgres</text><text class="s" x="149.2" y="43.0" text-anchor="middle" font-size="8">star schema</text></g><g class="k-proc"><rect x="211.0" y="8.0" width="79.5" height="44" rx="6"/><text x="250.8" y="28.0" text-anchor="middle" font-size="10" font-weight="600">django</text><text class="s" x="250.8" y="43.0" text-anchor="middle" font-size="8">RBAC</text></g><g class="k-out"><rect x="312.5" y="8.0" width="79.5" height="44" rx="6"/><text x="352.2" y="28.0" text-anchor="middle" font-size="10" font-weight="600">review</text><text class="s" x="352.2" y="43.0" text-anchor="middle" font-size="8">weekly</text></g><path class="a" d="M 87.5 30.0 L 104.5 30.0"/><polygon points="109.5,30.0 103.5,26.5 103.5,33.5"/><path class="a" d="M 189.0 30.0 L 206.0 30.0"/><polygon points="211.0,30.0 205.0,26.5 205.0,33.5"/><path class="a" d="M 290.5 30.0 L 307.5 30.0"/><polygon points="312.5,30.0 306.5,26.5 306.5,33.5"/></svg></div>
+          <p class="card-tools">Django · PostgreSQL · Power BI · Notion API</p>
+          <div class="card-foot"><span class="card-cta" aria-hidden="true">read case study →</span></div>
+        </article>
+        <article class="card reveal" data-slug="pnl" data-tools="postgres bigquery sp-api shopify python sql" data-tags="pipelines bi">
+          <div class="card-top">
+            <span class="card-num">04</span>
+            <span class="badge">production · private code</span>
+          </div>
+          <h3 class="card-title"><a class="card-main" href="work/pnl-platform.html">p&amp;l platform</a></h3>
+          <p class="card-outcome">Owned the company&#x27;s monthly P&amp;L process from Aug 2025 to Sep 2026.</p>
+          <div class="card-thumb"><svg class="fl" viewBox="0 0 270 60" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><g class="k-src"><rect x="8.0" y="8.0" width="70.0" height="44" rx="6"/><text x="43.0" y="28.0" text-anchor="middle" font-size="10" font-weight="600">sources</text><text class="s" x="43.0" y="43.0" text-anchor="middle" font-size="8">3</text></g><g class="k-store"><rect x="100.0" y="8.0" width="70.0" height="44" rx="6"/><text x="135.0" y="28.0" text-anchor="middle" font-size="10" font-weight="600">postgres</text><text class="s" x="135.0" y="43.0" text-anchor="middle" font-size="8">P&amp;L db</text></g><g class="k-out"><rect x="192.0" y="8.0" width="70.0" height="44" rx="6"/><text x="227.0" y="28.0" text-anchor="middle" font-size="10" font-weight="600">P&amp;L</text><text class="s" x="227.0" y="43.0" text-anchor="middle" font-size="8">monthly</text></g><path class="a" d="M 78.0 30.0 L 95.0 30.0"/><polygon points="100.0,30.0 94.0,26.5 94.0,33.5"/><path class="a" d="M 170.0 30.0 L 187.0 30.0"/><polygon points="192.0,30.0 186.0,26.5 186.0,33.5"/></svg></div>
+          <p class="card-tools">PostgreSQL · BigQuery · SP-API · Shopify</p>
+          <div class="card-foot"><span class="card-cta" aria-hidden="true">read case study →</span></div>
+        </article>
+        <article class="card reveal card--wide" data-slug="seoul" data-tools="pytorch xgboost sklearn pandas python" data-tags="ml">
+          <div class="card-top">
+            <span class="card-num">05</span>
+            <span class="badge badge--research">research · repo</span>
+          </div>
+          <h3 class="card-title"><a class="card-main" href="work/seoul-bike-forecasting.html">seoul bike forecasting</a></h3>
+          <p class="card-outcome">Multi-Scale TCN+LSTM reaches 88.83% R² on hourly demand, and a data-leakage flaw in a published benchmark is corrected.</p>
+          <div class="card-thumb"><svg class="fl" viewBox="0 0 270 60" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><g class="k-src"><rect x="8.0" y="8.0" width="70.0" height="44" rx="6"/><text x="43.0" y="28.0" text-anchor="middle" font-size="10" font-weight="600">data</text><text class="s" x="43.0" y="43.0" text-anchor="middle" font-size="8">hourly</text></g><g class="k-proc"><rect x="100.0" y="8.0" width="70.0" height="44" rx="6"/><text x="135.0" y="28.0" text-anchor="middle" font-size="10" font-weight="600">7 models</text><text class="s" x="135.0" y="43.0" text-anchor="middle" font-size="8">LSTM·TCN</text></g><g class="k-out"><rect x="192.0" y="8.0" width="70.0" height="44" rx="6"/><text x="227.0" y="28.0" text-anchor="middle" font-size="10" font-weight="600">R² 88.83%</text><text class="s" x="227.0" y="43.0" text-anchor="middle" font-size="8">best</text></g><path class="a" d="M 78.0 30.0 L 95.0 30.0"/><polygon points="100.0,30.0 94.0,26.5 94.0,33.5"/><path class="a" d="M 170.0 30.0 L 187.0 30.0"/><polygon points="192.0,30.0 186.0,26.5 186.0,33.5"/></svg></div>
+          <p class="card-tools">PyTorch · TensorFlow · XGBoost · scikit-learn</p>
+          <div class="card-foot"><span class="card-cta" aria-hidden="true">read case study →</span><a class="card-repo" href="https://github.com/utkarshsawant65" target="_blank" rel="noopener" aria-label="seoul bike forecasting repository (opens GitHub)">repo ↗</a></div>
+        </article>
+        <article class="card reveal" data-slug="speech2insight" data-tools="python docker github-actions streamlit" data-tags="llm ml">
+          <div class="card-top">
+            <span class="card-num">06</span>
+            <span class="badge badge--public">open source</span>
+          </div>
+          <h3 class="card-title"><a class="card-main" href="work/speech2insight.html">speech2insight</a></h3>
+          <p class="card-outcome">Audio to insight in five stages, Dockerised and evaluated with BLEU/ROUGE.</p>
+          <div class="card-thumb"><svg class="fl" viewBox="0 0 270 60" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><g class="k-src"><rect x="8.0" y="8.0" width="70.0" height="44" rx="6"/><text x="43.0" y="28.0" text-anchor="middle" font-size="10" font-weight="600">audio</text><text class="s" x="43.0" y="43.0" text-anchor="middle" font-size="8">mp3</text></g><g class="k-proc"><rect x="100.0" y="8.0" width="70.0" height="44" rx="6"/><text x="135.0" y="28.0" text-anchor="middle" font-size="10" font-weight="600">5 stages</text><text class="s" x="135.0" y="43.0" text-anchor="middle" font-size="8">nlp</text></g><g class="k-out"><rect x="192.0" y="8.0" width="70.0" height="44" rx="6"/><text x="227.0" y="28.0" text-anchor="middle" font-size="10" font-weight="600">insight</text><text class="s" x="227.0" y="43.0" text-anchor="middle" font-size="8">json</text></g><path class="a" d="M 78.0 30.0 L 95.0 30.0"/><polygon points="100.0,30.0 94.0,26.5 94.0,33.5"/><path class="a" d="M 170.0 30.0 L 187.0 30.0"/><polygon points="192.0,30.0 186.0,26.5 186.0,33.5"/></svg></div>
+          <p class="card-tools">Whisper · HuggingFace · Docker · GitHub Actions</p>
+          <div class="card-foot"><span class="card-cta" aria-hidden="true">read case study →</span><a class="card-repo" href="https://github.com/utkarshsawant65" target="_blank" rel="noopener" aria-label="speech2insight repository (opens GitHub)">repo ↗</a></div>
+        </article>
+        </div>
+        <div class="other-work">
+          <h3>other work</h3>
+          <ul>
+            <li>Pricing &amp; margin app: Electron + React desktop tool for per-channel margins (internal).</li>
+            <li>Bollywood Pulse: multi-source music analytics with Airflow + dbt. In progress; it gets a card once a public repo with a working ingest exists.</li>
+          </ul>
+        </div>
       </div>
-      <div class="scroll-hint" aria-hidden="true">
-        <span>scroll</span>
-        <div class="scroll-line"></div>
+    </section>
+
+    <!-- PLATFORM -->
+    <section id="platform">
+      <div class="shell">
+        <div class="section-head reveal">
+          <span class="section-num">02</span>
+          <h2>platform<span class="dot">.</span></h2>
+          <p class="section-sub">my data platform, layer by layer. hover or tap a tool to trace which projects it touches.</p>
+        </div>
+        <div class="pipeline">
+        <div class="stage reveal"><span class="stage-name">INGEST</span><div class="stage-chips"><button class="chip" type="button" data-tool="sp-api" aria-pressed="false">Amazon SP-API</button><button class="chip" type="button" data-tool="shopify" aria-pressed="false">Shopify API</button><button class="chip" type="button" data-tool="notion" aria-pressed="false">Notion API</button><button class="chip" type="button" data-tool="apify" aria-pressed="false">REST / Apify</button><button class="chip" type="button" data-tool="pubsub" aria-pressed="false">Pub/Sub</button></div></div>
+        <div class="stage reveal"><span class="stage-name">STORE</span><div class="stage-chips"><button class="chip" type="button" data-tool="postgres" aria-pressed="false">PostgreSQL</button><button class="chip" type="button" data-tool="bigquery" aria-pressed="false">BigQuery</button><button class="chip" type="button" data-tool="snowflake" aria-pressed="false">Snowflake</button><button class="chip" type="button" data-tool="gcs" aria-pressed="false">GCS</button><button class="chip" type="button" data-tool="cloudsql" aria-pressed="false">Cloud SQL</button></div></div>
+        <div class="stage reveal"><span class="stage-name">TRANSFORM</span><div class="stage-chips"><button class="chip" type="button" data-tool="sql" aria-pressed="false">SQL</button><button class="chip" type="button" data-tool="dbt" aria-pressed="false">dbt</button><button class="chip" type="button" data-tool="python" aria-pressed="false">Python</button><button class="chip" type="button" data-tool="pandas" aria-pressed="false">pandas</button><button class="chip" type="button" data-tool="pydantic" aria-pressed="false">Pydantic</button></div></div>
+        <div class="stage reveal"><span class="stage-name">ORCHESTRATE</span><div class="stage-chips"><button class="chip" type="button" data-tool="airflow" aria-pressed="false">Airflow</button><button class="chip" type="button" data-tool="cloud-scheduler" aria-pressed="false">Cloud Scheduler</button><button class="chip" type="button" data-tool="github-actions" aria-pressed="false">GitHub Actions</button><button class="chip" type="button" data-tool="docker" aria-pressed="false">Docker</button><button class="chip" type="button" data-tool="cloud-run" aria-pressed="false">Cloud Run</button></div></div>
+        <div class="stage reveal"><span class="stage-name">SERVE / BI</span><div class="stage-chips"><button class="chip" type="button" data-tool="powerbi" aria-pressed="false">Power BI</button><button class="chip" type="button" data-tool="tableau" aria-pressed="false">Tableau</button><button class="chip" type="button" data-tool="django" aria-pressed="false">Django</button><button class="chip" type="button" data-tool="fastapi" aria-pressed="false">FastAPI</button><button class="chip" type="button" data-tool="streamlit" aria-pressed="false">Streamlit</button></div></div>
+        <div class="stage reveal"><span class="stage-name">AI / LLM</span><div class="stage-chips"><button class="chip" type="button" data-tool="claude" aria-pressed="false">Claude API</button><button class="chip" type="button" data-tool="langgraph" aria-pressed="false">LangGraph</button><button class="chip" type="button" data-tool="langchain" aria-pressed="false">LangChain</button><button class="chip" type="button" data-tool="rag" aria-pressed="false">RAG</button><button class="chip" type="button" data-tool="milvus" aria-pressed="false">Milvus</button><button class="chip" type="button" data-tool="langsmith" aria-pressed="false">LangSmith</button></div></div>
+        <div class="stage reveal"><span class="stage-name">ML</span><div class="stage-chips"><button class="chip" type="button" data-tool="sklearn" aria-pressed="false">scikit-learn</button><button class="chip" type="button" data-tool="xgboost" aria-pressed="false">XGBoost</button><button class="chip" type="button" data-tool="pytorch" aria-pressed="false">PyTorch</button></div></div>
+        </div>
+        <p class="lineage-status" id="lineage-status" aria-live="polite">hover or tap a tool to see which projects use it.</p>
       </div>
     </section>
 
     <!-- ABOUT -->
-    <section id="about" class="section">
-      <div class="section-head" data-animate>
-        <span class="section-num mono">01</span>
-        <h2>about<span class="dot">.</span></h2>
-      </div>
-      <div class="about-grid">
-        <div class="about-text" data-animate>
-          <p class="lead" data-animate-text>I'm Utkarsh, a data engineer who likes the messy middle: the place where business problems become schemas, schemas become pipelines, and pipelines become decisions.</p>
-          <p>
-            Right now I'm <strong>the entire data &amp; automation function</strong>
-            at <strong>Noritual Lab</strong>, a matcha e-commerce startup in Berlin.
-            Solo DE reporting to the founder. I picked the stack, stood up the
-            warehouse, and own everything from <span class="mono inline">CREATE SCHEMA</span>
-            to the KPI dashboard founders open every Monday. Before that I worked
-            on agentic AI research at <strong>BioMed X</strong> (Heidelberg), and I
-            hold an <strong>MS in Applied Data Science &amp; Analytics</strong>
-            from SRH Heidelberg (GPA 1.9).
-          </p>
-          <p>
-            I care about systems that are <em>actually used</em>: small, debuggable,
-            documented, and cheap to run. In a typical week I'm writing DAGs,
-            shipping Django, generating the monthly P&amp;L, and tuning a
-            Claude-API invoice classifier — all in the same repo.
-          </p>
-          <p class="now-line">
-            <span class="mono now-label">// now</span>
-            running Noritual's monthly P&amp;L · scaling the invoice pipeline · open to data eng &amp; AI eng roles.
-          </p>
+    <section id="about">
+      <div class="shell">
+        <div class="section-head reveal">
+          <span class="section-num">03</span>
+          <h2>about<span class="dot">.</span></h2>
         </div>
-        <aside class="about-card" data-animate>
-          <div class="card-header mono">~/utkarsh --whoami</div>
-          <dl>
-            <dt>role</dt><dd>Data Engineer · Noritual Lab</dd>
-            <dt>based</dt><dd>Mannheim / Berlin 🇩🇪</dd>
-            <dt>edu</dt><dd>MS Data Science · SRH Heidelberg</dd>
-            <dt>focus</dt><dd>pipelines · warehouses · LLMs · BI</dd>
-            <dt>open to</dt><dd>Data Eng · Analytics Eng · AI Eng</dd>
-          </dl>
-        </aside>
-      </div>
-    </section>
-
-    <!-- STACK -->
-    <section id="stack" class="section section-marquee">
-      <div class="section-head" data-animate>
-        <span class="section-num mono">02</span>
-        <h2>stack<span class="dot">.</span></h2>
-        <p class="section-sub">tools I use daily, weekly, or know well enough to ship with.</p>
-      </div>
-      <div class="marquee" data-marquee data-animate>
-        <div class="marquee-track">
-          <div class="marquee-row marquee-row--ltr">
-            <span class="marquee-item">Python</span>
-            <span class="marquee-item">PostgreSQL</span>
-            <span class="marquee-item">BigQuery</span>
-            <span class="marquee-item">SQL</span>
-            <span class="marquee-item">Cloud Run</span>
-            <span class="marquee-item">Cloud Scheduler</span>
-            <span class="marquee-item">GCS</span>
-            <span class="marquee-item">Docker</span>
-            <span class="marquee-item">GitHub Actions</span>
-            <span class="marquee-item">Secret Manager</span>
-            <span class="marquee-item">Cloud SQL</span>
-            <span class="marquee-item">Pub/Sub</span>
+        <div class="about-grid">
+          <div class="about-text reveal">
+            <p class="lead">I'm Utkarsh, a data engineer who likes the messy middle: the place where business problems become schemas, schemas become pipelines, and pipelines become decisions.</p>
+            <p>Until Sep 2026 I was <strong>the entire data &amp; automation function</strong> at <strong>Noritual Lab</strong>, a matcha e-commerce startup in Berlin. Solo DE reporting to the founder: I picked the stack, stood up the warehouse, and owned everything from <code>CREATE SCHEMA</code> to the KPI dashboard the founders opened every Monday. Before that I worked on agentic AI research at <strong>BioMed X</strong> (Heidelberg), and I hold an <strong>MS in Applied Data Science &amp; Analytics</strong> from SRH Heidelberg (GPA 1.9).</p>
+            <p>I care about systems that are <em>actually used</em>: small, debuggable, documented, and cheap to run. In a typical week I wrote DAGs, shipped Django, generated the monthly P&amp;L, and tuned a Claude-API invoice classifier, all in the same repo.</p>
+            <p class="now-line"><span class="now-label">// now</span>open to Data Engineer &amp; AI Engineer roles · available immediately · building <a href="work/live-commerce-airtime.html">Live Commerce Airtime Intelligence</a></p>
           </div>
+          <aside class="about-card reveal" aria-label="Quick facts">
+            <div class="card-header mono">~/utkarsh --whoami</div>
+            <dl>
+              <dt>role</dt><dd>Data Engineer (Data + AI)</dd>
+              <dt>status</dt><dd>available · open to relocation</dd>
+              <dt>based</dt><dd>Mannheim, Germany</dd>
+              <dt>edu</dt><dd>MS Data Science · SRH Heidelberg</dd>
+              <dt>focus</dt><dd>pipelines · warehouses · LLMs · BI</dd>
+              <dt>open to</dt><dd>Data Eng · Analytics Eng · AI Eng</dd>
+            </dl>
+          </aside>
         </div>
-        <div class="marquee-track">
-          <div class="marquee-row marquee-row--rtl">
-            <span class="marquee-item">Claude API</span>
-            <span class="marquee-item">LangChain</span>
-            <span class="marquee-item">LangGraph</span>
-            <span class="marquee-item">Milvus</span>
-            <span class="marquee-item">LangSmith</span>
-            <span class="marquee-item">RAG</span>
-            <span class="marquee-item">HuggingFace</span>
-            <span class="marquee-item">Whisper</span>
-            <span class="marquee-item">PyTorch</span>
-            <span class="marquee-item">XGBoost</span>
-            <span class="marquee-item">scikit-learn</span>
-          </div>
-        </div>
-        <div class="marquee-track">
-          <div class="marquee-row marquee-row--ltr marquee-row--slow">
-            <span class="marquee-item">Django</span>
-            <span class="marquee-item">Streamlit</span>
-            <span class="marquee-item">Power BI</span>
-            <span class="marquee-item">Tableau</span>
-            <span class="marquee-item">Apps Script</span>
-            <span class="marquee-item">Notion API</span>
-            <span class="marquee-item">Amazon SP-API</span>
-            <span class="marquee-item">Shopify API</span>
-            <span class="marquee-item">Airflow</span>
-            <span class="marquee-item">dbt</span>
-            <span class="marquee-item">pandas</span>
-            <span class="marquee-item">Pydantic</span>
-            <span class="marquee-item">FastAPI</span>
-            <span class="marquee-item">React</span>
-            <span class="marquee-item">Electron</span>
-            <span class="marquee-item">TypeScript</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- HOW I THINK -->
-    <section id="thinking" class="section">
-      <div class="section-head" data-animate>
-        <span class="section-num mono">03</span>
-        <h2>how I work<span class="dot">.</span></h2>
-        <p class="section-sub">a few things I believe about building data systems.</p>
-      </div>
-      <div class="principles">
-        <article class="principle" data-animate>
-          <span class="principle-num mono">i.</span>
-          <h3>boring beats clever.</h3>
-          <p>An ugly cron job in production beats an elegant DAG in a notebook. Ship small, iterate, log everything.</p>
-        </article>
-        <article class="principle" data-animate>
-          <span class="principle-num mono">ii.</span>
-          <h3>pipelines serve a question.</h3>
-          <p>Every pipeline exists to answer something someone actually asks, not to look good in a diagram.</p>
-        </article>
-        <article class="principle" data-animate>
-          <span class="principle-num mono">iii.</span>
-          <h3>docs are part of done.</h3>
-          <p>A README, a runbook, a diagram. Every project. If the next engineer can't find it, it doesn't exist.</p>
-        </article>
-      </div>
-    </section>
-
-    <!-- PROJECTS -->
-    <section id="projects" class="section section-projects">
-      <div class="section-head" data-animate>
-        <span class="section-num mono">04</span>
-        <h2>selected work<span class="dot">.</span></h2>
-        <p class="section-sub">seven pieces. from production pipelines to research code.</p>
-      </div>
-
-      <div class="project-filters" role="tablist" data-animate>
-        <button class="chip-filter is-active" data-filter="all" type="button">all</button>
-        <button class="chip-filter" data-filter="infra" type="button">infra</button>
-        <button class="chip-filter" data-filter="data" type="button">data</button>
-        <button class="chip-filter" data-filter="llm" type="button">llm</button>
-        <button class="chip-filter" data-filter="ml" type="button">ml</button>
-        <button class="chip-filter" data-filter="app" type="button">app</button>
-      </div>
-
-      <div class="project-stack">
-
-        <!-- 01: KPI DASHBOARD -->
-        <div class="project-slot" data-tags="app data">
-          <article class="project-card">
-            <header class="project-card-head">
-              <div class="project-card-meta">
-                <span class="project-num">01</span>
-                <div class="project-card-text">
-                  <span class="project-card-cat mono">noritual lab · production · 2025</span>
-                  <h3>kpi dashboard</h3>
-                </div>
-              </div>
-              <span class="project-card-cta mono">case study →</span>
-            </header>
-            <div class="project-card-body">
-              <div class="project-card-blurb">
-                <p>Full internal web app, end-to-end with one teammate in ~2 months. Scoped requirements with the team, designed a star-schema Postgres backend, built a Django UI with CRUD, role-based access (user / admin / founder), and forgot-password flow. Ingests from Notion API, Google Sheets, and direct UI inputs.</p>
-                <p class="project-card-why">→ single source of truth for founders' weekly review meetings. 10–12 active users.</p>
-                <ul class="project-tech">
-                  <li>Django</li><li>PostgreSQL</li><li>Power BI</li>
-                  <li>Notion API</li><li>GCP VM</li><li>RBAC</li>
-                </ul>
-              </div>
-              <div class="project-card-visual">
-                <!-- schematic: star schema (fact center, 4 dims outer) -->
-                <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" font-family="JetBrains Mono, monospace" font-size="9">
-                  <g stroke="rgba(0,225,255,0.4)" stroke-width="1" fill="none">
-                    <line x1="200" y1="150" x2="80" y2="60"/>
-                    <line x1="200" y1="150" x2="320" y2="60"/>
-                    <line x1="200" y1="150" x2="80" y2="240"/>
-                    <line x1="200" y1="150" x2="320" y2="240"/>
-                  </g>
-                  <g>
-                    <rect x="140" y="120" width="120" height="60" rx="4" fill="rgba(124,92,255,0.15)" stroke="rgba(124,92,255,0.7)"/>
-                    <text x="200" y="145" text-anchor="middle" fill="#e8e8ee" font-weight="600">fct_kpi</text>
-                    <text x="200" y="165" text-anchor="middle" fill="#a8a8b8">key_result · value · period</text>
-                  </g>
-                  <g fill="rgba(0,225,255,0.12)" stroke="rgba(0,225,255,0.5)">
-                    <rect x="20" y="35" width="120" height="50" rx="4"/>
-                    <rect x="260" y="35" width="120" height="50" rx="4"/>
-                    <rect x="20" y="215" width="120" height="50" rx="4"/>
-                    <rect x="260" y="215" width="120" height="50" rx="4"/>
-                  </g>
-                  <g fill="#a8a8b8" text-anchor="middle">
-                    <text x="80" y="55">dim_date</text><text x="80" y="72" font-size="8">day · month · qtr</text>
-                    <text x="320" y="55">dim_org</text><text x="320" y="72" font-size="8">team · level</text>
-                    <text x="80" y="235">dim_objective</text><text x="80" y="252" font-size="8">id · name · target</text>
-                    <text x="320" y="235">dim_user</text><text x="320" y="252" font-size="8">role: u / a / f</text>
-                  </g>
-                </svg>
-                <span class="project-card-visual-cap mono">// star schema · postgres</span>
-              </div>
-            </div>
-          </article>
-        </div>
-
-        <!-- 02: INVOICE AUTOMATION -->
-        <div class="project-slot" data-tags="llm data infra">
-          <article class="project-card">
-            <header class="project-card-head">
-              <div class="project-card-meta">
-                <span class="project-num">02</span>
-                <div class="project-card-text">
-                  <span class="project-card-cat mono">noritual lab · production · 2026</span>
-                  <h3>invoice automation</h3>
-                </div>
-              </div>
-              <span class="project-card-cta mono">case study →</span>
-            </header>
-            <div class="project-card-body">
-              <div class="project-card-blurb">
-                <p>Processes <strong>~1,000 transactions/month</strong>: classifies which need invoices (~25% do), then matches each one to its PDF with confidence-scored Claude API screening. Hive-style partitioned GCS layout (raw → accepted → trash) for clean backfills and audit. Replaced accountant fees previously spent on transaction-linking.</p>
-                <p class="project-card-why">→ the hardest problem I'm proud of solving — invoice/PO matching at scale.</p>
-                <ul class="project-tech">
-                  <li>Claude API</li><li>Python</li><li>GCS</li>
-                  <li>Cloud Scheduler</li><li>Gmail API</li><li>pdfplumber</li>
-                </ul>
-              </div>
-              <div class="project-card-visual">
-                <!-- schematic: pipeline DAG with claude classifier branch -->
-                <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" font-family="JetBrains Mono, monospace" font-size="9">
-                  <g stroke="rgba(124,92,255,0.5)" stroke-width="1.2" fill="none">
-                    <path id="ie1" d="M 60,80 L 140,80"/>
-                    <path id="ie2" d="M 200,80 L 280,40"/>
-                    <path id="ie3" d="M 200,80 L 280,120"/>
-                    <path id="ie4" d="M 60,200 L 140,200"/>
-                    <path id="ie5" d="M 200,200 L 280,240"/>
-                    <path id="ie6" d="M 280,40 L 360,40"/>
-                    <path id="ie7" d="M 280,120 L 360,120"/>
-                  </g>
-                  <g>
-                    <rect x="20" y="60" width="80" height="40" rx="4" fill="rgba(15,15,23,0.85)" stroke="rgba(0,225,255,0.55)"/>
-                    <text x="60" y="84" text-anchor="middle" fill="#a8a8b8" font-size="9">Gmail PDFs</text>
-                    <rect x="20" y="180" width="80" height="40" rx="4" fill="rgba(15,15,23,0.85)" stroke="rgba(0,225,255,0.55)"/>
-                    <text x="60" y="204" text-anchor="middle" fill="#a8a8b8" font-size="9">Txn ledger</text>
-                    <rect x="140" y="60" width="80" height="40" rx="4" fill="rgba(124,92,255,0.2)" stroke="rgba(124,92,255,0.7)"/>
-                    <text x="180" y="78" text-anchor="middle" fill="#e8e8ee" font-size="9">Claude</text>
-                    <text x="180" y="92" text-anchor="middle" fill="#a8a8b8" font-size="8">screen + score</text>
-                    <rect x="140" y="180" width="80" height="40" rx="4" fill="rgba(124,92,255,0.2)" stroke="rgba(124,92,255,0.7)"/>
-                    <text x="180" y="198" text-anchor="middle" fill="#e8e8ee" font-size="9">Matcher</text>
-                    <text x="180" y="212" text-anchor="middle" fill="#a8a8b8" font-size="8">conf ≥ 0.92</text>
-                    <rect x="280" y="22" width="80" height="36" rx="4" fill="rgba(15,15,23,0.85)" stroke="rgba(107,207,127,0.6)"/>
-                    <text x="320" y="44" text-anchor="middle" fill="#6bcf7f" font-size="9">accepted/</text>
-                    <rect x="280" y="100" width="80" height="36" rx="4" fill="rgba(15,15,23,0.85)" stroke="rgba(255,180,107,0.6)"/>
-                    <text x="320" y="122" text-anchor="middle" fill="#ffb86b" font-size="9">trash/</text>
-                    <rect x="280" y="222" width="80" height="36" rx="4" fill="rgba(15,15,23,0.85)" stroke="rgba(255,92,176,0.6)"/>
-                    <text x="320" y="244" text-anchor="middle" fill="#ff5cb0" font-size="9">P&amp;L</text>
-                  </g>
-                  <g fill="#00e1ff">
-                    <circle r="3"><animateMotion dur="4s" repeatCount="indefinite"><mpath href="#ie1"/></animateMotion></circle>
-                    <circle r="3"><animateMotion dur="4.5s" begin="1.5s" repeatCount="indefinite"><mpath href="#ie2"/></animateMotion></circle>
-                    <circle r="3"><animateMotion dur="4s" begin="3s" repeatCount="indefinite"><mpath href="#ie4"/></animateMotion></circle>
-                  </g>
-                </svg>
-                <span class="project-card-visual-cap mono">// pipeline · ~1k tx/mo</span>
-              </div>
-            </div>
-          </article>
-        </div>
-
-        <!-- 03: P&L PLATFORM -->
-        <div class="project-slot" data-tags="infra data">
-          <article class="project-card">
-            <header class="project-card-head">
-              <div class="project-card-meta">
-                <span class="project-num">03</span>
-                <div class="project-card-text">
-                  <span class="project-card-cat mono">noritual lab · production · 2025</span>
-                  <h3>p&amp;l platform</h3>
-                </div>
-              </div>
-              <span class="project-card-cta mono">case study →</span>
-            </header>
-            <div class="project-card-body">
-              <div class="project-card-blurb">
-                <p>Own the company's monthly P&amp;L process since Aug 2025. Designed the P&amp;L data model end-to-end, built a dedicated Postgres DB ingesting from Amazon SP-API, Shopify, and Sheets. Multi-currency FX conversion, three-way matching (PO ↔ goods receipt ↔ invoice), month-end close support.</p>
-                <p class="project-card-why">→ replaced the founder's prior (inaccurate) self-built P&amp;L with an owned, defensible monthly cadence.</p>
-                <ul class="project-tech">
-                  <li>PostgreSQL</li><li>BigQuery</li><li>Amazon SP-API</li>
-                  <li>Shopify API</li><li>Python</li><li>dbt-style layering</li>
-                </ul>
-              </div>
-              <div class="project-card-visual">
-                <!-- schematic: P&L line chart trending up -->
-                <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" font-family="JetBrains Mono, monospace" font-size="9">
-                  <g stroke="rgba(168,168,184,0.15)" stroke-width="1">
-                    <line x1="40" y1="60" x2="380" y2="60"/>
-                    <line x1="40" y1="120" x2="380" y2="120"/>
-                    <line x1="40" y1="180" x2="380" y2="180"/>
-                    <line x1="40" y1="240" x2="380" y2="240"/>
-                  </g>
-                  <g fill="#a8a8b8" text-anchor="end">
-                    <text x="34" y="64">€20k</text>
-                    <text x="34" y="124">€15k</text>
-                    <text x="34" y="184">€10k</text>
-                    <text x="34" y="244">€5k</text>
-                  </g>
-                  <g fill="#a8a8b8" text-anchor="middle" font-size="8">
-                    <text x="80" y="265">Aug</text>
-                    <text x="140" y="265">Sep</text>
-                    <text x="200" y="265">Oct</text>
-                    <text x="260" y="265">Nov</text>
-                    <text x="320" y="265">Dec</text>
-                    <text x="370" y="265">May</text>
-                  </g>
-                  <!-- revenue (rising) -->
-                  <path d="M 60,200 L 120,180 L 180,160 L 240,130 L 300,90 L 360,70" stroke="#00e1ff" stroke-width="2" fill="none"/>
-                  <!-- cogs (rising slower) -->
-                  <path d="M 60,230 L 120,220 L 180,205 L 240,185 L 300,160 L 360,150" stroke="#ff5cb0" stroke-width="2" fill="none" stroke-dasharray="3,2"/>
-                  <!-- net margin (rising) -->
-                  <path d="M 60,250 L 120,240 L 180,222 L 240,200 L 300,170 L 360,130" stroke="#6bcf7f" stroke-width="2" fill="none"/>
-                  <!-- legend -->
-                  <g font-size="8">
-                    <circle cx="200" cy="25" r="3" fill="#00e1ff"/><text x="208" y="28" fill="#a8a8b8">revenue</text>
-                    <circle cx="260" cy="25" r="3" fill="#ff5cb0"/><text x="268" y="28" fill="#a8a8b8">cogs</text>
-                    <circle cx="300" cy="25" r="3" fill="#6bcf7f"/><text x="308" y="28" fill="#a8a8b8">net</text>
-                  </g>
-                </svg>
-                <span class="project-card-visual-cap mono">// monthly P&amp;L · since aug 2025</span>
-              </div>
-            </div>
-          </article>
-        </div>
-
-        <!-- 04: PRICING APP -->
-        <div class="project-slot" data-tags="app data">
-          <article class="project-card">
-            <header class="project-card-head">
-              <div class="project-card-meta">
-                <span class="project-num">04</span>
-                <div class="project-card-text">
-                  <span class="project-card-cat mono">noritual lab · v1.0 · 2026</span>
-                  <h3>pricing &amp; margin app</h3>
-                </div>
-              </div>
-              <span class="project-card-cta mono">case study →</span>
-            </header>
-            <div class="project-card-body">
-              <div class="project-card-blurb">
-                <p>Electron + React desktop tool for multi-channel pricing analysis. Three calculation modes, channel-specific COGS, editable fee configuration, and a real-time margin dashboard backed by Postgres.</p>
-                <p class="project-card-why">→ real margin visibility per channel in one click.</p>
-                <ul class="project-tech">
-                  <li>Electron</li><li>React 19</li><li>MUI</li>
-                  <li>PostgreSQL</li><li>Node</li><li>Jest</li>
-                </ul>
-              </div>
-              <div class="project-card-visual">
-                <!-- schematic: bar chart of channel margins -->
-                <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" font-family="JetBrains Mono, monospace" font-size="9">
-                  <g stroke="rgba(168,168,184,0.15)" stroke-width="1">
-                    <line x1="60" y1="40" x2="380" y2="40"/>
-                    <line x1="60" y1="120" x2="380" y2="120"/>
-                    <line x1="60" y1="200" x2="380" y2="200"/>
-                    <line x1="60" y1="240" x2="380" y2="240"/>
-                  </g>
-                  <g fill="#a8a8b8" text-anchor="end" font-size="9">
-                    <text x="54" y="44">40%</text>
-                    <text x="54" y="124">30%</text>
-                    <text x="54" y="204">20%</text>
-                    <text x="54" y="244">10%</text>
-                  </g>
-                  <!-- bars -->
-                  <g>
-                    <rect x="80" y="60" width="50" height="180" fill="rgba(124,92,255,0.7)" stroke="rgba(124,92,255,1)"/>
-                    <text x="105" y="265" text-anchor="middle" fill="#a8a8b8" font-size="9">amzn.de</text>
-                    <text x="105" y="55" text-anchor="middle" fill="#e8e8ee" font-size="9" font-weight="600">38%</text>
-
-                    <rect x="160" y="100" width="50" height="140" fill="rgba(0,225,255,0.7)" stroke="rgba(0,225,255,1)"/>
-                    <text x="185" y="265" text-anchor="middle" fill="#a8a8b8" font-size="9">amzn.uk</text>
-                    <text x="185" y="95" text-anchor="middle" fill="#e8e8ee" font-size="9" font-weight="600">29%</text>
-
-                    <rect x="240" y="80" width="50" height="160" fill="rgba(255,92,176,0.7)" stroke="rgba(255,92,176,1)"/>
-                    <text x="265" y="265" text-anchor="middle" fill="#a8a8b8" font-size="9">shopify</text>
-                    <text x="265" y="75" text-anchor="middle" fill="#e8e8ee" font-size="9" font-weight="600">33%</text>
-
-                    <rect x="320" y="140" width="50" height="100" fill="rgba(107,207,127,0.7)" stroke="rgba(107,207,127,1)"/>
-                    <text x="345" y="265" text-anchor="middle" fill="#a8a8b8" font-size="9">b2b</text>
-                    <text x="345" y="135" text-anchor="middle" fill="#e8e8ee" font-size="9" font-weight="600">21%</text>
-                  </g>
-                </svg>
-                <span class="project-card-visual-cap mono">// margin % by channel</span>
-              </div>
-            </div>
-          </article>
-        </div>
-
-        <!-- 05: SEOUL BIKE -->
-        <div class="project-slot" data-tags="ml">
-          <article class="project-card">
-            <header class="project-card-head">
-              <div class="project-card-meta">
-                <span class="project-num">05</span>
-                <div class="project-card-text">
-                  <span class="project-card-cat mono">thesis · research · 2026</span>
-                  <h3>seoul bike forecasting</h3>
-                </div>
-              </div>
-              <span class="project-card-cta mono">case study →</span>
-            </header>
-            <div class="project-card-body">
-              <div class="project-card-blurb">
-                <p>Master's thesis comparing 7 deep architectures (LSTM, TCN, TCN-LSTM, attention variants) for hourly demand forecasting. Best model: <strong>Multi-Scale TCN+LSTM at 88.83% R²</strong>. Identified and corrected a data-leakage flaw in the original published benchmark.</p>
-                <p class="project-card-why">→ academic rigor: research finding, not just a model exercise.</p>
-                <ul class="project-tech">
-                  <li>PyTorch</li><li>TensorFlow</li><li>XGBoost</li>
-                  <li>scikit-learn</li><li>pandas</li>
-                </ul>
-              </div>
-              <div class="project-card-visual">
-                <!-- schematic: forecast vs actual curve -->
-                <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" font-family="JetBrains Mono, monospace" font-size="9">
-                  <g stroke="rgba(168,168,184,0.15)" stroke-width="1">
-                    <line x1="40" y1="60" x2="380" y2="60"/>
-                    <line x1="40" y1="120" x2="380" y2="120"/>
-                    <line x1="40" y1="180" x2="380" y2="180"/>
-                    <line x1="40" y1="240" x2="380" y2="240"/>
-                  </g>
-                  <!-- actual demand: jagged curve -->
-                  <path d="M 50,200 L 70,160 L 90,180 L 110,120 L 130,140 L 150,80 L 170,100 L 190,60 L 210,90 L 230,130 L 250,110 L 270,170 L 290,150 L 310,200 L 330,180 L 350,230 L 370,210" stroke="#00e1ff" stroke-width="1.5" fill="none"/>
-                  <!-- predicted: smoother -->
-                  <path d="M 50,205 L 70,170 L 90,175 L 110,130 L 130,135 L 150,90 L 170,95 L 190,70 L 210,95 L 230,125 L 250,115 L 270,165 L 290,155 L 310,195 L 330,185 L 350,225 L 370,215" stroke="#ff5cb0" stroke-width="1.5" fill="none" stroke-dasharray="3,2"/>
-                  <g font-size="9">
-                    <circle cx="220" cy="25" r="3" fill="#00e1ff"/><text x="228" y="28" fill="#a8a8b8">actual</text>
-                    <circle cx="280" cy="25" r="3" fill="#ff5cb0"/><text x="288" y="28" fill="#a8a8b8">predicted</text>
-                  </g>
-                  <text x="370" y="285" text-anchor="end" fill="#6bcf7f" font-size="11" font-weight="600">R² = 88.83%</text>
-                </svg>
-                <span class="project-card-visual-cap mono">// hourly demand · TCN+LSTM</span>
-              </div>
-            </div>
-          </article>
-        </div>
-
-        <!-- 06: BOLLYWOOD PULSE -->
-        <div class="project-slot" data-tags="data ml">
-          <article class="project-card">
-            <header class="project-card-head">
-              <div class="project-card-meta">
-                <span class="project-num">06</span>
-                <div class="project-card-text">
-                  <span class="project-card-cat mono">side project · scoped · 2026</span>
-                  <h3>bollywood pulse</h3>
-                </div>
-              </div>
-              <span class="project-card-cta mono">case study →</span>
-            </header>
-            <div class="project-card-body">
-              <div class="project-card-blurb">
-                <p>12-week flagship build: Airflow, dbt, multilingual NLP (Hindi, Punjabi, English), XGBoost trend prediction, Streamlit dashboard. Cross-platform fuzzy matching across Spotify, YouTube, Genius, with MLflow tracking and a silent GitHub Actions collector.</p>
-                <p class="project-card-why">→ early-signal layer for trend bets, not post-hoc charts.</p>
-                <ul class="project-tech">
-                  <li>Airflow</li><li>dbt</li><li>HuggingFace</li>
-                  <li>XGBoost</li><li>AWS Athena</li><li>Streamlit</li>
-                </ul>
-              </div>
-              <div class="project-card-visual">
-                <!-- schematic: multi-source ingest -> dbt -> model -->
-                <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" font-family="JetBrains Mono, monospace" font-size="9">
-                  <g stroke="rgba(124,92,255,0.5)" stroke-width="1.2" fill="none">
-                    <path d="M 80,60 L 180,140"/>
-                    <path d="M 80,140 L 180,140"/>
-                    <path d="M 80,220 L 180,140"/>
-                    <path d="M 220,140 L 320,140"/>
-                  </g>
-                  <g>
-                    <rect x="20" y="40" width="100" height="40" rx="4" fill="rgba(15,15,23,0.85)" stroke="rgba(0,225,255,0.55)"/>
-                    <text x="70" y="64" text-anchor="middle" fill="#a8a8b8">Spotify API</text>
-                    <rect x="20" y="120" width="100" height="40" rx="4" fill="rgba(15,15,23,0.85)" stroke="rgba(0,225,255,0.55)"/>
-                    <text x="70" y="144" text-anchor="middle" fill="#a8a8b8">YouTube API</text>
-                    <rect x="20" y="200" width="100" height="40" rx="4" fill="rgba(15,15,23,0.85)" stroke="rgba(0,225,255,0.55)"/>
-                    <text x="70" y="224" text-anchor="middle" fill="#a8a8b8">Genius lyrics</text>
-
-                    <rect x="180" y="115" width="100" height="50" rx="4" fill="rgba(124,92,255,0.2)" stroke="rgba(124,92,255,0.7)"/>
-                    <text x="230" y="135" text-anchor="middle" fill="#e8e8ee">dbt</text>
-                    <text x="230" y="152" text-anchor="middle" fill="#a8a8b8" font-size="8">fuzzy match · NLP</text>
-
-                    <rect x="320" y="115" width="60" height="50" rx="4" fill="rgba(255,92,176,0.2)" stroke="rgba(255,92,176,0.7)"/>
-                    <text x="350" y="135" text-anchor="middle" fill="#e8e8ee">XGB</text>
-                    <text x="350" y="152" text-anchor="middle" fill="#a8a8b8" font-size="8">trend</text>
-                  </g>
-                </svg>
-                <span class="project-card-visual-cap mono">// ingest · model · serve</span>
-              </div>
-            </div>
-          </article>
-        </div>
-
-        <!-- 07: SPEECH2INSIGHT -->
-        <div class="project-slot" data-tags="llm ml">
-          <article class="project-card">
-            <header class="project-card-head">
-              <div class="project-card-meta">
-                <span class="project-num">07</span>
-                <div class="project-card-text">
-                  <span class="project-card-cat mono">open source · 2025</span>
-                  <h3>speech2insight</h3>
-                </div>
-              </div>
-              <span class="project-card-cta mono">case study →</span>
-            </header>
-            <div class="project-card-body">
-              <div class="project-card-blurb">
-                <p>5-stage pipeline taking audio to insight: Whisper transcription, sentiment (TextBlob + DistilRoBERTa), LSA topic modeling, T5 chunked summarization with BLEU/ROUGE eval. Dockerised with ffmpeg bundled, full CI/CD on GHCR.</p>
-                <p class="project-card-why">→ open source · evaluated · reproducible.</p>
-                <ul class="project-tech">
-                  <li>Whisper</li><li>HuggingFace</li><li>Streamlit</li>
-                  <li>Docker</li><li>GitHub Actions</li>
-                </ul>
-              </div>
-              <div class="project-card-visual">
-                <!-- schematic: 5-stage horizontal pipeline -->
-                <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" font-family="JetBrains Mono, monospace" font-size="9">
-                  <g stroke="rgba(0,225,255,0.4)" stroke-width="1.5" fill="none">
-                    <line x1="75" y1="150" x2="105" y2="150"/>
-                    <line x1="135" y1="150" x2="165" y2="150"/>
-                    <line x1="195" y1="150" x2="225" y2="150"/>
-                    <line x1="255" y1="150" x2="285" y2="150"/>
-                    <line x1="315" y1="150" x2="345" y2="150"/>
-                  </g>
-                  <g text-anchor="middle">
-                    <circle cx="45" cy="150" r="22" fill="rgba(15,15,23,0.85)" stroke="rgba(0,225,255,0.6)" stroke-width="1.2"/>
-                    <text x="45" y="148" fill="#e8e8ee" font-size="8">audio</text>
-                    <text x="45" y="160" fill="#a8a8b8" font-size="7">.mp3</text>
-
-                    <circle cx="120" cy="150" r="22" fill="rgba(124,92,255,0.2)" stroke="rgba(124,92,255,0.7)" stroke-width="1.2"/>
-                    <text x="120" y="148" fill="#e8e8ee" font-size="8">whisper</text>
-                    <text x="120" y="160" fill="#a8a8b8" font-size="7">stt</text>
-
-                    <circle cx="180" cy="150" r="22" fill="rgba(124,92,255,0.2)" stroke="rgba(124,92,255,0.7)" stroke-width="1.2"/>
-                    <text x="180" y="148" fill="#e8e8ee" font-size="8">sentiment</text>
-                    <text x="180" y="160" fill="#a8a8b8" font-size="7">distil</text>
-
-                    <circle cx="240" cy="150" r="22" fill="rgba(124,92,255,0.2)" stroke="rgba(124,92,255,0.7)" stroke-width="1.2"/>
-                    <text x="240" y="148" fill="#e8e8ee" font-size="8">topic</text>
-                    <text x="240" y="160" fill="#a8a8b8" font-size="7">LSA</text>
-
-                    <circle cx="300" cy="150" r="22" fill="rgba(124,92,255,0.2)" stroke="rgba(124,92,255,0.7)" stroke-width="1.2"/>
-                    <text x="300" y="148" fill="#e8e8ee" font-size="8">summary</text>
-                    <text x="300" y="160" fill="#a8a8b8" font-size="7">T5</text>
-
-                    <circle cx="370" cy="150" r="22" fill="rgba(15,15,23,0.85)" stroke="rgba(107,207,127,0.6)" stroke-width="1.2"/>
-                    <text x="370" y="148" fill="#6bcf7f" font-size="8">insight</text>
-                    <text x="370" y="160" fill="#a8a8b8" font-size="7">.json</text>
-                  </g>
-                </svg>
-                <span class="project-card-visual-cap mono">// 5-stage pipeline · audio → insight</span>
-              </div>
-            </div>
-          </article>
-        </div>
-
       </div>
     </section>
 
     <!-- EXPERIENCE -->
-    <section id="experience" class="section">
-      <div class="section-head" data-animate>
-        <span class="section-num mono">05</span>
-        <h2>experience<span class="dot">.</span></h2>
+    <section id="experience">
+      <div class="shell">
+        <div class="section-head reveal">
+          <span class="section-num">04</span>
+          <h2>experience<span class="dot">.</span></h2>
+        </div>
+        <!-- TODO(author): use the exact titles and dates from your Arbeitszeugnis. Dates below are placeholders. -->
+        <ol class="timeline">
+          <li class="timeline-item reveal">
+            <div class="timeline-when mono">Mar 2026 – Sep 2026</div>
+            <div class="timeline-what">
+              <h3>Data Engineer · Noritual Lab (Berlin, remote/hybrid)</h3>
+              <p>Solo data &amp; automation engineer at a matcha e-commerce startup, reporting to the founder.</p>
+              <ul>
+                <li>Replaced accountant fees for transaction-to-invoice linking (~1,000 transactions/month) → <a href="work/invoice-automation.html">invoice automation</a></li>
+                <li>Owned the monthly P&amp;L close and the KPI platform used by 10–12 people → <a href="work/pnl-platform.html">p&amp;l platform</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="timeline-item reveal">
+            <div class="timeline-when mono">May 2025 – Feb 2026</div>
+            <div class="timeline-what">
+              <h3>Data Engineering Intern · Noritual Lab</h3>
+              <p>Joined as an intern and grew into the whole data function.</p>
+              <ul>
+                <li>Built the KPI platform (Django + Postgres star schema) with one teammate in about two months → <a href="work/kpi-platform.html">kpi platform</a></li>
+                <li>Stood up the GCP / Postgres warehouse and the dedicated P&amp;L database from scratch</li>
+              </ul>
+            </div>
+          </li>
+          <li class="timeline-item reveal">
+            <div class="timeline-when mono">Oct 2024 – Mar 2025</div>
+            <div class="timeline-what">
+              <h3>Research Student, Agentic AI · BioMed X (Heidelberg)</h3>
+              <p>Multi-agent system for academic paper discovery and retrieval.</p>
+              <ul>
+                <li>Built it with LangGraph + LangChain on a RAG pipeline over Milvus</li>
+                <li>Streamlit front-end, Docker, CI/CD and LangSmith observability</li>
+              </ul>
+            </div>
+          </li>
+        </ol>
+
+        <div class="education reveal">
+          <h3>education.</h3>
+          <div class="edu-grid">
+            <div class="edu-card">
+              <span class="when">Apr 2024 – Mar 2026</span>
+              <h4>MS Applied Data Science &amp; Analytics</h4>
+              <p>SRH Heidelberg · GPA 1.9 (German scale, "gut"). Thesis: hybrid TCN-LSTM demand forecasting, with a data-leakage flaw found in a published benchmark.</p>
+            </div>
+            <div class="edu-card">
+              <span class="when">Jul 2019 – May 2023</span>
+              <h4>BE Computer Engineering</h4>
+              <p>Mumbai University · GPA 8.39 / 10.</p>
+            </div>
+          </div>
+        </div>
       </div>
-      <ol class="timeline">
-        <li class="timeline-item" data-animate>
-          <div class="timeline-when mono">May 2025 — current</div>
-          <div class="timeline-what">
-            <h3>Data Engineer · Noritual Lab (Berlin)</h3>
-            <p>
-              Solo data &amp; automation engineer at a matcha e-commerce startup.
-              Reports to the founder. Own the GCP/Postgres warehouse, the KPI
-              dashboard (Django, 10–12 users), monthly P&amp;L close, and a
-              Claude-API invoice pipeline processing ~1,000 transactions/month.
-              Vendor migrations saved ~€1,250/year.
-            </p>
-          </div>
-        </li>
-        <li class="timeline-item" data-animate>
-          <div class="timeline-when mono">Oct 2024 — Mar 2025</div>
-          <div class="timeline-what">
-            <h3>Research Student, Agentic AI · BioMed X (Heidelberg)</h3>
-            <p>
-              Built a multi-agent system with LangGraph + LangChain for academic
-              paper discovery and retrieval. RAG pipeline on Milvus, Streamlit
-              front-end, Docker, CI/CD, LangSmith observability.
-            </p>
-          </div>
-        </li>
-        <li class="timeline-item" data-animate>
-          <div class="timeline-when mono">Apr 2024 — Mar 2026</div>
-          <div class="timeline-what">
-            <h3>MS Applied Data Science &amp; Analytics · SRH Heidelberg</h3>
-            <p>
-              GPA 1.9 (German scale · high distinction). Thesis on hybrid
-              TCN-LSTM architectures for demand forecasting (best model 88.83%
-              R²) — identified a data-leakage flaw in the published CUBIST
-              benchmark paper.
-            </p>
-          </div>
-        </li>
-        <li class="timeline-item" data-animate>
-          <div class="timeline-when mono">Jul 2019 — May 2023</div>
-          <div class="timeline-what">
-            <h3>BE Computer Engineering · Mumbai University</h3>
-            <p>GPA 8.39 / 10.</p>
-          </div>
-        </li>
-      </ol>
+    </section>
+
+    <!-- PRINCIPLES -->
+    <section id="thinking">
+      <div class="shell">
+        <div class="section-head reveal">
+          <span class="section-num">05</span>
+          <h2>how I work<span class="dot">.</span></h2>
+        </div>
+        <div class="principles">
+          <article class="principle reveal"><span class="principle-num">i.</span><h3>boring beats clever.</h3><p>An ugly cron job in production beats an elegant DAG in a notebook. Ship small, iterate, log everything.</p></article>
+          <article class="principle reveal"><span class="principle-num">ii.</span><h3>pipelines serve a question.</h3><p>Every pipeline exists to answer something someone actually asks, not to look good in a diagram.</p></article>
+          <article class="principle reveal"><span class="principle-num">iii.</span><h3>docs are part of done.</h3><p>A README, a runbook, a diagram. Every project. If the next engineer can't find it, it doesn't exist.</p></article>
+        </div>
+      </div>
     </section>
 
     <!-- CONTACT -->
-    <section id="contact" class="section contact">
-      <div class="section-head" data-animate>
-        <span class="section-num mono">06</span>
-        <h2>contact<span class="dot">.</span></h2>
-      </div>
-      <div class="contact-grid">
-        <div data-animate>
-          <p class="contact-lead">
-            Looking for a data engineer who ships? Or just want to swap notes
-            on Airflow, LLMs, or German bureaucracy?
-          </p>
-          <a href="mailto:utkarsh.sawant21@gmail.com" class="contact-mail">
-            utkarsh.sawant21@gmail.com
-            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H8M17 7v9"/></svg>
-          </a>
+    <section id="contact">
+      <div class="shell reveal">
+        <div class="section-head">
+          <span class="section-num">06</span>
+          <h2>contact<span class="dot">.</span></h2>
         </div>
-        <ul class="contact-links" data-animate>
-          <li>
-            <a href="https://github.com/utkarshsawant65" target="_blank" rel="noopener">
-              <span class="mono">github</span>
-              <span>@utkarshsawant65</span>
-            </a>
-          </li>
-          <li>
-            <a href="https://www.linkedin.com/in/utkarsh-sawant/" target="_blank" rel="noopener">
-              <span class="mono">linkedin</span>
-              <span>/in/utkarsh-sawant</span>
-            </a>
-          </li>
-          <li>
-            <a href="mailto:utkarsh.sawant21@gmail.com">
-              <span class="mono">email</span>
-              <span>utkarsh.sawant21@gmail.com</span>
-            </a>
-          </li>
-        </ul>
+        <p class="contact-lead">Hiring for data engineering or AI engineering? I reply within 24 hours.</p>
+        <div class="contact-mail-row">
+          <a class="contact-mail" href="mailto:utkarsh.sawant21@gmail.com">utkarsh.sawant21@gmail.com</a>
+          <button class="btn btn-ghost copy-btn" type="button" data-copy="utkarsh.sawant21@gmail.com">copy</button>
+          <a class="btn btn-ghost" href="mailto:utkarsh.sawant21@gmail.com">email ↗</a>
+        </div>
+        <div class="contact-actions">
+          <a class="btn btn-primary" href="https://cal.com/utkarsh-sawant" target="_blank" rel="noopener">Book a 20-min call ↗</a>
+          <a class="btn btn-ghost" href="https://www.linkedin.com/in/utkarsh-sawant/" target="_blank" rel="noopener">LinkedIn ↗</a>
+          <a class="btn btn-ghost" href="https://github.com/utkarshsawant65" target="_blank" rel="noopener">GitHub ↗</a>
+        </div>
+        <p class="contact-note">Based in Mannheim · open to relocation · available immediately</p>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <div>
-      <span class="mono">© 2026 utkarsh sawant</span>
-      <span class="mono muted">// built with html, css, js &amp; coffee</span>
-    </div>
-    <div class="mono muted">v1.0 · live</div>
+    <span>© 2026 utkarsh sawant <span class="muted">// built with html, css, js &amp; coffee</span></span>
+    <span>v2 · local build</span>
   </footer>
 
-  <script src="js/main.js"></script>
+  <script src="assets/js/nav.js"></script>
+  <script src="assets/js/lineage.js"></script>
+  <script src="assets/js/copy.js"></script>
 </body>
 </html>

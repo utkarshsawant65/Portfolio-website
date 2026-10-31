@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Speech2Insight — Utkarsh Sawant</title>
+  <meta name="description" content="An open-source pipeline that turns audio into transcripts, sentiment, topics and summaries, Dockerised and evaluated with BLEU and ROUGE." />
+  <script>document.documentElement.classList.add('js');</script>
+  <link rel="canonical" href="https://utkarshsawant65.github.io/Portfolio-website/work/speech2insight.html" />
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Speech2Insight — Utkarsh Sawant" />
+  <meta property="og:description" content="An open-source pipeline that turns audio into transcripts, sentiment, topics and summaries, Dockerised and evaluated with BLEU and ROUGE." />
+  <meta property="og:url" content="https://utkarshsawant65.github.io/Portfolio-website/work/speech2insight.html" />
+  <meta property="og:image" content="https://utkarshsawant65.github.io/Portfolio-website/assets/og/og-speech2insight.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="627" />
+  <meta property="og:image:alt" content="Speech2Insight — Utkarsh Sawant" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/tokens.css" />
+  <link rel="stylesheet" href="../assets/css/base.css" />
+  <link rel="stylesheet" href="../assets/css/components.css" />
+  <link rel="stylesheet" href="../assets/css/motion.css" />
+</head>
+<body>
+  <a class="skip" href="#content">Skip to content</a>
+  <div class="progress" aria-hidden="true"></div>
+  <header class="site-header">
+    <a href="../index.html" class="brand" aria-label="Utkarsh Sawant, home">
+      <span class="brand-dot" aria-hidden="true"></span>
+      <span class="brand-text">utkarsh<span class="brand-accent">.sawant</span></span>
+    </a>
+    <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="primary-nav">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="primary-nav" id="primary-nav" aria-label="Primary">
+      <ul><li><a href="../index.html#work">work</a></li><li><a href="../index.html#platform">platform</a></li><li><a href="../index.html#experience">experience</a></li><li><a href="../index.html#contact">contact</a></li></ul>
+    </nav>
+  </header>
+
+  <main class="cs" id="content">
+    <a class="cs-back" href="../index.html#work">← back to work</a>
+
+    <p class="cs-kicker"><span class="badge badge--public">open source</span> speech2insight</p>
+    <h1 class="cs-title" style="view-transition-name: title-speech2insight">Audio to insight in five reproducible stages</h1>
+    <p class="cs-lede">An open-source pipeline that turns audio into transcripts, sentiment, topics and summaries, Dockerised and evaluated with BLEU and ROUGE.</p>
+
+    <dl class="cs-meta">
+      <dt>Role</dt><dd>sole author · Timeline: 2025 · Team: 1</dd>
+      <dt>Stack</dt><dd>Whisper · HuggingFace · Streamlit · Docker · GitHub Actions</dd>
+      <dt>Code</dt><dd>open source on <a href="https://github.com/utkarshsawant65" target="_blank" rel="noopener">GitHub</a></dd>
+    </dl>
+
+    <section><h2><span class="n">01</span>Problem</h2><p>Recorded conversations hold sentiment, topics and decisions, but nobody listens to hours of audio. The aim was a pipeline that takes an audio file and returns a structured summary of what was said and how it landed.</p></section>
+    <section><h2><span class="n">02</span>Constraints</h2><ul class="points"><li>Must run on anyone's machine, including the ffmpeg dependency Whisper needs.</li><li>Each stage should be swappable and testable on its own.</li><li>Summaries need a measurable quality bar, not just a good-looking demo.</li></ul></section>
+    <section><h2><span class="n">03</span>Architecture</h2>
+      <figure class="diagram"><svg class="fl" viewBox="0 0 640 164" role="img" xmlns="http://www.w3.org/2000/svg"><title>Speech2Insight pipeline</title><desc>Audio is transcribed by Whisper, then analysed for sentiment and topics, summarised with a chunked T5 model, and returned as a JSON insight.</desc><g class="k-src"><rect x="8.0" y="8.0" width="184.0" height="52" rx="6"/><text x="100.0" y="32.0" text-anchor="middle" font-size="12" font-weight="600">audio</text><text class="s" x="100.0" y="47.0" text-anchor="middle" font-size="10">.mp3</text></g><g class="k-proc"><rect x="228.0" y="8.0" width="184.0" height="52" rx="6"/><text x="320.0" y="32.0" text-anchor="middle" font-size="12" font-weight="600">whisper</text><text class="s" x="320.0" y="47.0" text-anchor="middle" font-size="10">transcription</text></g><g class="k-proc"><rect x="448.0" y="8.0" width="184.0" height="52" rx="6"/><text x="540.0" y="32.0" text-anchor="middle" font-size="12" font-weight="600">sentiment</text><text class="s" x="540.0" y="47.0" text-anchor="middle" font-size="10">TextBlob + DistilRoBERTa</text></g><g class="k-proc"><rect x="8.0" y="104.0" width="184.0" height="52" rx="6"/><text x="100.0" y="128.0" text-anchor="middle" font-size="12" font-weight="600">topics</text><text class="s" x="100.0" y="143.0" text-anchor="middle" font-size="10">LSA</text></g><g class="k-proc"><rect x="228.0" y="104.0" width="184.0" height="52" rx="6"/><text x="320.0" y="128.0" text-anchor="middle" font-size="12" font-weight="600">summary</text><text class="s" x="320.0" y="143.0" text-anchor="middle" font-size="10">T5, chunked</text></g><g class="k-out"><rect x="448.0" y="104.0" width="184.0" height="52" rx="6"/><text x="540.0" y="128.0" text-anchor="middle" font-size="12" font-weight="600">insight</text><text class="s" x="540.0" y="143.0" text-anchor="middle" font-size="10">.json</text></g><path class="a" d="M 192.0 34.0 L 223.0 34.0"/><polygon points="228.0,34.0 222.0,30.5 222.0,37.5"/><path class="a" d="M 412.0 34.0 L 443.0 34.0"/><polygon points="448.0,34.0 442.0,30.5 442.0,37.5"/><path class="a" d="M 540.0 60.0 L 540.0 82.0 L 100.0 82.0 L 100.0 99.0"/><polygon points="100.0,104.0 96.5,98.0 103.5,98.0"/><path class="a" d="M 192.0 130.0 L 223.0 130.0"/><polygon points="228.0,130.0 222.0,126.5 222.0,133.5"/><path class="a" d="M 412.0 130.0 L 443.0 130.0"/><polygon points="448.0,130.0 442.0,126.5 442.0,133.5"/></svg><figcaption>// 5 stages · audio → insight</figcaption></figure>
+    </section>
+    <section><h2><span class="n">04</span>Key decisions</h2><ul class="points"><li><strong>Five small stages instead of one model.</strong> Each stage has one job and can be replaced without touching the others.</li><li><strong>Chunked summarisation with BLEU / ROUGE evaluation.</strong> Long transcripts are split to fit T5's input window, and quality is scored instead of eyeballed.</li><li><strong>Docker with ffmpeg bundled and CI/CD to GHCR.</strong> The same image runs locally and in the pipeline, which removes the usual dependency setup.</li></ul></section>
+    <section><h2><span class="n">05</span>Data model <span class="muted" style="font-size:.9rem;font-weight:400">· Output contract</span></h2>
+      <pre><code>insight.json
+  transcript    full text from whisper
+  sentiment     per segment (TextBlob + DistilRoBERTa)
+  topics        LSA topic terms
+  summary       T5, chunked, scored with BLEU / ROUGE</code></pre>
+    </section>
+    <section><h2><span class="n">06</span>Results</h2>
+      <div class="results"><div class="result"><strong>5</strong><span>pipeline stages</span></div><div class="result"><strong>BLEU · ROUGE</strong><span>summary evaluation</span></div><div class="result"><strong>GHCR</strong><span>image published from CI</span></div></div>
+      <p>Open source, evaluated and reproducible.</p>
+    </section>
+    <section><h2><span class="n">07</span>What I'd do next</h2><ul class="points"><li>Speaker diarisation, so sentiment and topics can be attributed to who said what.</li><li>Swap the summariser behind an interface so a newer model can be compared on the same BLEU / ROUGE harness.</li></ul></section>
+    <section><h2><span class="n">08</span>Links</h2><div class="cs-links"><a class="btn btn-ghost" href="https://github.com/utkarshsawant65" target="_blank" rel="noopener">GitHub ↗</a></div></section>
+
+    <nav class="cs-next" aria-label="Case studies">
+      <a class="btn btn-ghost" href="../index.html#work">← all work</a>
+      <a class="btn btn-primary" href="invoice-automation.html">next: invoice automation →</a>
+    </nav>
+  </main>
+
+  <footer class="site-footer">
+    <span>© 2026 utkarsh sawant <span class="muted">// built with html, css, js &amp; coffee</span></span>
+    <span>v2 · local build</span>
+  </footer>
+
+  <script src="../assets/js/nav.js"></script>
+</body>
+</html>

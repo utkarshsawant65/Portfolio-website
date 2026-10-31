@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>P&amp;L platform — Utkarsh Sawant</title>
+  <meta name="description" content="A dedicated Postgres P&amp;L database fed by Amazon SP-API, Shopify and Sheets, with FX conversion and three-way matching for the month-end close." />
+  <script>document.documentElement.classList.add('js');</script>
+  <link rel="canonical" href="https://utkarshsawant65.github.io/Portfolio-website/work/pnl-platform.html" />
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="P&amp;L platform — Utkarsh Sawant" />
+  <meta property="og:description" content="A dedicated Postgres P&amp;L database fed by Amazon SP-API, Shopify and Sheets, with FX conversion and three-way matching for the month-end close." />
+  <meta property="og:url" content="https://utkarshsawant65.github.io/Portfolio-website/work/pnl-platform.html" />
+  <meta property="og:image" content="https://utkarshsawant65.github.io/Portfolio-website/assets/og/og-pnl.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="627" />
+  <meta property="og:image:alt" content="P&amp;L platform — Utkarsh Sawant" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/tokens.css" />
+  <link rel="stylesheet" href="../assets/css/base.css" />
+  <link rel="stylesheet" href="../assets/css/components.css" />
+  <link rel="stylesheet" href="../assets/css/motion.css" />
+</head>
+<body>
+  <a class="skip" href="#content">Skip to content</a>
+  <div class="progress" aria-hidden="true"></div>
+  <header class="site-header">
+    <a href="../index.html" class="brand" aria-label="Utkarsh Sawant, home">
+      <span class="brand-dot" aria-hidden="true"></span>
+      <span class="brand-text">utkarsh<span class="brand-accent">.sawant</span></span>
+    </a>
+    <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="primary-nav">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="primary-nav" id="primary-nav" aria-label="Primary">
+      <ul><li><a href="../index.html#work">work</a></li><li><a href="../index.html#platform">platform</a></li><li><a href="../index.html#experience">experience</a></li><li><a href="../index.html#contact">contact</a></li></ul>
+    </nav>
+  </header>
+
+  <main class="cs" id="content">
+    <a class="cs-back" href="../index.html#work">← back to work</a>
+
+    <p class="cs-kicker"><span class="badge">production · private code</span> p&amp;l platform</p>
+    <h1 class="cs-title" style="view-transition-name: title-pnl">A defensible monthly P&amp;L, owned end to end</h1>
+    <p class="cs-lede">A dedicated Postgres P&amp;L database fed by Amazon SP-API, Shopify and Sheets, with FX conversion and three-way matching for the month-end close.</p>
+
+    <dl class="cs-meta">
+      <dt>Role</dt><dd>sole data engineer · Timeline: Aug 2025 – Sep 2026 · Team: 1</dd>
+      <dt>Stack</dt><dd>PostgreSQL · BigQuery · Amazon SP-API · Shopify API · Python</dd>
+      <dt>Code</dt><dd>private (company IP). Walkthrough on request: <a href="mailto:utkarsh.sawant21@gmail.com?subject=P%26L%20platform%20walkthrough">email me</a></dd>
+    </dl>
+
+    <section><h2><span class="n">01</span>Problem</h2><p>The company's monthly P&L was a founder-built spreadsheet that was not accurate enough to run a business on. Revenue, cost of goods and fees came from different systems and were reconciled by hand.</p><p>The task was to replace it with a process someone owns, that can be defended line by line, and that closes on a fixed monthly cadence.</p></section>
+    <section><h2><span class="n">02</span>Constraints</h2><ul class="points"><li>Three sources with different shapes: Amazon SP-API, Shopify and Google Sheets.</li><li>Multi-currency sales, so FX conversion has to be explicit and repeatable.</li><li>Month-end deadlines set by the accountant.</li><li>One engineer, who is also the person closing the month.</li></ul></section>
+    <section><h2><span class="n">03</span>Architecture</h2>
+      <figure class="diagram"><svg class="fl" viewBox="0 0 640 68" role="img" xmlns="http://www.w3.org/2000/svg"><title>P&amp;L platform architecture</title><desc>Three sources load into a dedicated Postgres P&amp;L database, FX conversion and three-way matching are applied, and the monthly P&amp;L is produced.</desc><g class="k-src"><rect x="8.0" y="8.0" width="129.0" height="52" rx="6"/><text x="72.5" y="32.0" text-anchor="middle" font-size="12" font-weight="600">sp-api·shopify·sheets</text><text class="s" x="72.5" y="47.0" text-anchor="middle" font-size="10">3 sources</text></g><g class="k-store"><rect x="173.0" y="8.0" width="129.0" height="52" rx="6"/><text x="237.5" y="32.0" text-anchor="middle" font-size="12" font-weight="600">postgres p&amp;l db</text><text class="s" x="237.5" y="47.0" text-anchor="middle" font-size="10">dedicated database</text></g><g class="k-proc"><rect x="338.0" y="8.0" width="129.0" height="52" rx="6"/><text x="402.5" y="32.0" text-anchor="middle" font-size="12" font-weight="600">fx + 3-way match</text><text class="s" x="402.5" y="47.0" text-anchor="middle" font-size="10">PO · receipt · invoice</text></g><g class="k-out"><rect x="503.0" y="8.0" width="129.0" height="52" rx="6"/><text x="567.5" y="32.0" text-anchor="middle" font-size="12" font-weight="600">monthly p&amp;l</text><text class="s" x="567.5" y="47.0" text-anchor="middle" font-size="10">month-end close</text></g><path class="a" d="M 137.0 34.0 L 168.0 34.0"/><polygon points="173.0,34.0 167.0,30.5 167.0,37.5"/><path class="a" d="M 302.0 34.0 L 333.0 34.0"/><polygon points="338.0,34.0 332.0,30.5 332.0,37.5"/><path class="a" d="M 467.0 34.0 L 498.0 34.0"/><polygon points="503.0,34.0 497.0,30.5 497.0,37.5"/></svg><figcaption>// sources → p&amp;l database → matching → monthly close</figcaption></figure>
+    </section>
+    <section><h2><span class="n">04</span>Key decisions</h2><ul class="points"><li><strong>A dedicated Postgres database for the P&L,</strong> separate from the operational apps, so the numbers have one owner and a stable schema.</li><li><strong>dbt-style layering</strong> (staging, then marts) so every P&L line traces back to a source row.</li><li><strong>Three-way matching</strong> of purchase order, goods receipt and invoice, so cost lines are backed by documents and not by estimates.</li></ul></section>
+    <section><h2><span class="n">05</span>Data model <span class="muted" style="font-size:.9rem;font-weight:400">· Mart</span></h2>
+      <pre><code>mart_pnl_monthly   month (PK) · revenue_total · cogs_total
+                   opex_total · net_margin
+fct_orders         order_id · sku_id · channel · revenue_eur · cogs_eur
+dim_channel        channel_id · name · fee_pct · currency</code></pre>
+    </section>
+    <section><h2><span class="n">06</span>Results</h2>
+      <div class="results"><div class="result"><strong>14</strong><span>months owned, Aug 2025 – Sep 2026</span></div><div class="result"><strong>3</strong><span>source systems unified</span></div><div class="result"><strong>1</strong><span>owner for the close</span></div></div>
+      <p>The monthly statement moved from an inaccurate self-built process to an owned, repeatable cadence.</p>
+    </section>
+    <section><h2><span class="n">07</span>What I'd do next</h2><ul class="points"><li>Automated reconciliation checks against the accountant's ledger, run before the close and not after.</li><li>Publish the monthly P&L as a governed dbt mart with tests on the totals, so a regression fails CI.</li></ul></section>
+    <section><h2><span class="n">08</span>Links</h2><div class="cs-links"><a class="btn btn-ghost" href="mailto:utkarsh.sawant21@gmail.com?subject=P%26L%20platform%20walkthrough">Request a walkthrough ↗</a></div></section>
+
+    <nav class="cs-next" aria-label="Case studies">
+      <a class="btn btn-ghost" href="../index.html#work">← all work</a>
+      <a class="btn btn-primary" href="seoul-bike-forecasting.html">next: seoul bike forecasting →</a>
+    </nav>
+  </main>
+
+  <footer class="site-footer">
+    <span>© 2026 utkarsh sawant <span class="muted">// built with html, css, js &amp; coffee</span></span>
+    <span>v2 · local build</span>
+  </footer>
+
+  <script src="../assets/js/nav.js"></script>
+</body>
+</html>

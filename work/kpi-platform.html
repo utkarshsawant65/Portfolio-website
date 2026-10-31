@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>KPI platform — Utkarsh Sawant</title>
+  <meta name="description" content="An internal web app on a Postgres star schema: Django UI, role-based access and a Power BI layer, built in about two months with one teammate." />
+  <script>document.documentElement.classList.add('js');</script>
+  <link rel="canonical" href="https://utkarshsawant65.github.io/Portfolio-website/work/kpi-platform.html" />
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="KPI platform — Utkarsh Sawant" />
+  <meta property="og:description" content="An internal web app on a Postgres star schema: Django UI, role-based access and a Power BI layer, built in about two months with one teammate." />
+  <meta property="og:url" content="https://utkarshsawant65.github.io/Portfolio-website/work/kpi-platform.html" />
+  <meta property="og:image" content="https://utkarshsawant65.github.io/Portfolio-website/assets/og/og-kpi.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="627" />
+  <meta property="og:image:alt" content="KPI platform — Utkarsh Sawant" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/tokens.css" />
+  <link rel="stylesheet" href="../assets/css/base.css" />
+  <link rel="stylesheet" href="../assets/css/components.css" />
+  <link rel="stylesheet" href="../assets/css/motion.css" />
+</head>
+<body>
+  <a class="skip" href="#content">Skip to content</a>
+  <div class="progress" aria-hidden="true"></div>
+  <header class="site-header">
+    <a href="../index.html" class="brand" aria-label="Utkarsh Sawant, home">
+      <span class="brand-dot" aria-hidden="true"></span>
+      <span class="brand-text">utkarsh<span class="brand-accent">.sawant</span></span>
+    </a>
+    <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="primary-nav">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="primary-nav" id="primary-nav" aria-label="Primary">
+      <ul><li><a href="../index.html#work">work</a></li><li><a href="../index.html#platform">platform</a></li><li><a href="../index.html#experience">experience</a></li><li><a href="../index.html#contact">contact</a></li></ul>
+    </nav>
+  </header>
+
+  <main class="cs" id="content">
+    <a class="cs-back" href="../index.html#work">← back to work</a>
+
+    <p class="cs-kicker"><span class="badge">production · private code</span> kpi platform</p>
+    <h1 class="cs-title" style="view-transition-name: title-kpi">One source of truth for the founders&#x27; weekly review</h1>
+    <p class="cs-lede">An internal web app on a Postgres star schema: Django UI, role-based access and a Power BI layer, built in about two months with one teammate.</p>
+
+    <dl class="cs-meta">
+      <dt>Role</dt><dd>data engineer · Timeline: 2025 · Team: 2</dd>
+      <dt>Stack</dt><dd>Django · PostgreSQL · Power BI · Notion API · GCP VM</dd>
+      <dt>Code</dt><dd>private (company IP). Walkthrough on request: <a href="mailto:utkarsh.sawant21@gmail.com?subject=KPI%20platform%20walkthrough">email me</a></dd>
+    </dl>
+
+    <section><h2><span class="n">01</span>Problem</h2><p>Team performance and plan tracking was spread across spreadsheets and ad-hoc reports. The founders ran weekly and monthly reviews without one agreed place for the numbers, so each meeting started with reconciling what was current.</p><p>The goal was a single source of truth the whole team could feed and the founders could trust.</p></section>
+    <section><h2><span class="n">02</span>Constraints</h2><ul class="points"><li>Two people and roughly two months, from requirements to deployment.</li><li>Three inbound channels: scheduled Notion API pulls, Google Sheets, and direct UI input.</li><li>Three roles with different rights: user, admin and founder.</li><li>Small infrastructure: one VM, no platform team.</li></ul></section>
+    <section><h2><span class="n">03</span>Architecture</h2>
+      <figure class="diagram"><svg class="fl" viewBox="0 0 640 68" role="img" xmlns="http://www.w3.org/2000/svg"><title>KPI platform architecture</title><desc>Notion, Sheets and UI input flow into a Postgres star schema, served by a Django app with role-based access for the weekly review.</desc><g class="k-src"><rect x="8.0" y="8.0" width="129.0" height="52" rx="6"/><text x="72.5" y="32.0" text-anchor="middle" font-size="12" font-weight="600">notion·sheets·UI</text><text class="s" x="72.5" y="47.0" text-anchor="middle" font-size="10">3 inbound channels</text></g><g class="k-store"><rect x="173.0" y="8.0" width="129.0" height="52" rx="6"/><text x="237.5" y="32.0" text-anchor="middle" font-size="12" font-weight="600">postgres</text><text class="s" x="237.5" y="47.0" text-anchor="middle" font-size="10">star schema</text></g><g class="k-proc"><rect x="338.0" y="8.0" width="129.0" height="52" rx="6"/><text x="402.5" y="32.0" text-anchor="middle" font-size="12" font-weight="600">django + RBAC</text><text class="s" x="402.5" y="47.0" text-anchor="middle" font-size="10">CRUD, auth, logging</text></g><g class="k-out"><rect x="503.0" y="8.0" width="129.0" height="52" rx="6"/><text x="567.5" y="32.0" text-anchor="middle" font-size="12" font-weight="600">weekly review</text><text class="s" x="567.5" y="47.0" text-anchor="middle" font-size="10">founders, 10–12 users</text></g><path class="a" d="M 137.0 34.0 L 168.0 34.0"/><polygon points="173.0,34.0 167.0,30.5 167.0,37.5"/><path class="a" d="M 302.0 34.0 L 333.0 34.0"/><polygon points="338.0,34.0 332.0,30.5 332.0,37.5"/><path class="a" d="M 467.0 34.0 L 498.0 34.0"/><polygon points="503.0,34.0 497.0,30.5 497.0,37.5"/></svg><figcaption>// inputs → star schema → app → review</figcaption></figure>
+    </section>
+    <section><h2><span class="n">04</span>Key decisions</h2><ul class="points"><li><strong>A star schema built for rollups.</strong> One KPI fact table with date, organisation, objective and user dimensions makes weekly and quarterly views cheap queries.</li><li><strong>Power BI first, Django second.</strong> Reporting started in Power BI on the Postgres layer and moved into a Django app once the team needed auth, RBAC and a better input experience.</li><li><strong>Three roles, enforced in the app.</strong> User, admin and founder roles, a forgot-password flow and logging, so access is a property of the system and not of who holds the link.</li></ul></section>
+    <section><h2><span class="n">05</span>Data model <span class="muted" style="font-size:.9rem;font-weight:400">· Schema</span></h2>
+      <pre><code>fct_kpi        key_result · value · period
+ ├─ dim_date        day · month · quarter
+ ├─ dim_org         team · level
+ ├─ dim_objective   id · name · target
+ └─ dim_user        role: user | admin | founder</code></pre>
+    </section>
+    <section><h2><span class="n">06</span>Results</h2>
+      <div class="results"><div class="result"><strong>10–12</strong><span>active users</span></div><div class="result"><strong>48</strong><span>metrics under one data contract</span></div><div class="result"><strong>~2 mo</strong><span>from requirements to deployment</span></div></div>
+      <p>Founders use it as the single source of truth in weekly and monthly review meetings.</p>
+    </section>
+    <section><h2><span class="n">07</span>What I'd do next</h2><ul class="points"><li>Automated freshness checks on the Notion pulls, so a stalled sync is flagged before the meeting and not during it.</li><li>Move the Power BI semantic layer fully onto the same star schema, so the app and the reports share one set of definitions.</li></ul></section>
+    <section><h2><span class="n">08</span>Links</h2><div class="cs-links"><a class="btn btn-ghost" href="mailto:utkarsh.sawant21@gmail.com?subject=KPI%20platform%20walkthrough">Request a walkthrough ↗</a></div></section>
+
+    <nav class="cs-next" aria-label="Case studies">
+      <a class="btn btn-ghost" href="../index.html#work">← all work</a>
+      <a class="btn btn-primary" href="pnl-platform.html">next: p&amp;l platform →</a>
+    </nav>
+  </main>
+
+  <footer class="site-footer">
+    <span>© 2026 utkarsh sawant <span class="muted">// built with html, css, js &amp; coffee</span></span>
+    <span>v2 · local build</span>
+  </footer>
+
+  <script src="../assets/js/nav.js"></script>
+</body>
+</html>
